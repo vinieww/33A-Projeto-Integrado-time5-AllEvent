@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Dados - Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;           
+            width: 100%;                   
+        }
+
+        .logo a {
+            text-decoration: none; 
+            color: inherit; 
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header compact">
+        <div class="container header-container">
+            <h1 class="logo">
+                <a href="{% url 'home' %}">AllEvent</a>
+            </h1>
+            <a href="{% url 'perfil' %}" class="user-info">
+                <i class="fas fa-user-circle user-icon"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <aside class="profile-nav">
+            <div class="nav-links">
+                <a href="{% url 'editar_dados' %}" class="nav-link active">Editar Dados</a>
+                <a href="{% url 'preferencias' %}" class="nav-link">Preferências</a>
+                <a href="{% url 'favoritos' %}" class="nav-link">Favoritos</a>
+            </div>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="nav-link logout-button">Log-out</button>
+            </form>
+        </aside>
+
+        <section class="profile-content">
+            <h2>Editar Dados</h2>
+
+            {% if messages %}
+                <div class="messages" style="margin-bottom: 20px;">
+                    {% for message in messages %}
+                    <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+                         {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <p>Aqui você pode alterar suas informações pessoais.</p>
+            
+            <form method="POST" action="{% url 'editar_dados' %}">
+                {% csrf_token %} 
+
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" value="{{ user.first_name }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+                </div>
+                <div class="form-group">
+    <label for="current_password">Senha Atual</label>
+    <input type="password" id="current_password" name="current_password" placeholder="Digite sua senha atual para confirmar" required>
+</div>
+
+<div class="form-group">
+    <label for="password">Nova Senha</label>
+    <div class="password-wrapper" style="position: relative;">
+        <input type="password" id="password" name="password" placeholder="Deixe em branco para não alterar">
+        <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+    </div>
+</div>
+                
+                <button type="submit" class="submit-btn">Salvar Alterações</button>
+            </form>
+        </section>
+    </main>
+    <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#password');
+
+    togglePassword.addEventListener('click', function (e) {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,739 @@
+/* style.css - Arquivo CSS Homogeneizado */
+
+/* 1. Variáveis Globais (Tokens) */
+:root {
+    /* Cores */
+    --primary-color: #0d6efd; /* Azul principal */
+    --secondary-color: #6c757d; /* Cinza secundário */
+    --header-background-start: #F59E0B; /* Laranja do gradiente */
+    --header-background-end: #EA580C; /* Laranja mais escuro do gradiente */
+    --background-color: #f8f9fa; /* Fundo geral claro */
+    --card-background: #ffffff; /* Fundo dos cards */
+    --text-color-dark: #212529; /* Texto principal escuro */
+    --text-color-light: #f8f9fa; /* Texto claro (para fundos escuros) */
+    --border-color: #dee2e6; /* Cor de borda geral */
+
+    --accent-color: var(--primary-color); /* Usando primary-color como acento principal */
+    --accent-color-hover: #0b5ed7; /* Hover para o acento */
+
+    /* Cores do Card de Busca (mantido para a estética original da index) */
+    --search-card-bg: #6B3A0F; /* Marrom do card de busca */
+    --search-card-text: #F3E9E2; /* Texto do card de busca */
+    --search-card-line: #B78563; /* Linha do card de busca */
+
+    /* Botões da Home (mantidos para a estética original da index) */
+    --btn-red: #DC2626;
+    --btn-red-hover: #B91C1C;
+    --btn-ghost-orange: #F97316;
+    --btn-ghost-orange-hover: #EA580C;
+
+    /* Tipografia */
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "Playfair Display", Georgia, serif;
+
+    /* Tamanhos de Fonte */
+    --fs-xs: 12px;
+    --fs-sm: 14px;
+    --fs-md: 16px;
+    --fs-lg: 18px;
+    --fs-xl: 24px;
+    --fs-xxl: 2.2rem; /* Ajustado para o tamanho do logo-text */
+    --fs-xxxl: 56px; /* Para o logo da index */
+
+    /* Espaçamentos e Raios */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-xxl: 32px;
+    --spacing-xxxl: 56px;
+
+    --border-radius-sm: 5px; /* Para inputs e botões menores */
+    --border-radius-md: 8px; /* Para cards de autenticação */
+    --border-radius-lg: 16px; /* Para cards da home */
+    --border-radius-pill: 999px; /* Para botões arredondados */
+
+    /* Sombras */
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05); /* Card de autenticação */
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25); /* Carrossel */
+    --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.16); /* Hover de cards */
+    --shadow-glow: 0 24px 38px rgba(124,58,237,.18); /* Card de busca */
+}
+
+/* 2. Reset Básico e Estilos Globais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+    border: 0;
+    background: none;
+}
+
+/* Utilitários */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-xl); /* Ajustado para consistência */
+}
+
+.row {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+}
+
+.mt-xxl { margin-top: var(--spacing-xxl); } /* Exemplo de utilitário de margem */
+
+/* 3. Estilos de Componentes Comuns */
+
+/* Header */
+.site-header {
+    background: linear-gradient(135deg, var(--header-background-start), var(--header-background-end));
+    padding: var(--spacing-xxl) 0 calc(var(--spacing-xxxl) + 48px); /* Padding maior para a home */
+    position: relative;
+    z-index: 1;
+    border-bottom: 1px solid var(--header-background-end); /* Borda consistente */
+}
+
+.site-header.compact { /* Para páginas de autenticação e perfil */
+    padding: var(--spacing-md) var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, var(--header-background-start), var(--header-background-end)); /* Manter gradiente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+}
+
+.site-header .logo-text,
+.site-header .logo { /* Unificando o estilo do logo */
+    font-family: var(--font-serif);
+    font-weight: 700; /* Originalmente 700, mantido. Index usava 800 */
+    font-size: var(--fs-xxl); /* Tamanho grande e elegante */
+    color: white;
+    letter-spacing: .3px;
+    line-height: 1;
+}
+
+.site-header .tagline {
+    color: #FFF7ED; /* Cor original da tagline */
+    opacity: .95;
+    margin-top: 6px;
+    font-size: var(--fs-sm);
+}
+
+.site-header .nav { /* Estilo para a navegação da header na home */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+}
+
+/* User Info na header do perfil */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--fs-lg);
+    color: white; /* Cor do texto no header */
+    text-decoration: none;
+    transition: opacity 0.2s ease-in-out;
+}
+.user-info:hover {
+    opacity: 0.8;
+}
+.user-icon {
+    font-size: 2em; /* Relativo ao font-size do .user-info */
+}
+
+/* Botões (geral) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-pill);
+    font-size: var(--fs-md);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent; /* Adicionado para consistência */
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    opacity: 0.9;
+    background-color: var(--accent-color-hover);
+    border-color: var(--accent-color-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+.btn-secondary:hover {
+    opacity: 0.9;
+}
+
+/* Botões específicos da Home */
+.btn-ghost {
+    color: #fff;
+    border: 1.5px solid var(--btn-ghost-orange);
+    background: transparent;
+    padding: 10px 16px; /* Padding específico para este botão */
+}
+.btn-ghost:hover {
+    background: rgba(255,255,255,.08);
+    border-color: var(--btn-ghost-orange-hover);
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-pill);
+    display: inline-grid;
+    place-items: center;
+    border: 1.5px solid rgba(255,255,255,.6);
+    color: #fff;
+    padding: 0; /* Remover padding padrão para um botão de ícone */
+}
+
+.btn.btn-home-primary { /* Para diferenciar o "SEU EVENTO" da home */
+    background: var(--btn-red);
+    color: #fff;
+    padding: 10px 20px;
+    font-weight: 700;
+    border-color: var(--btn-red); /* Adicionar borda para consistência */
+}
+.btn.btn-home-primary:hover {
+    background: var(--btn-red-hover);
+    border-color: var(--btn-red-hover);
+}
+
+
+/* Form Card (Auth e outras páginas simples) */
+.auth-card {
+    background-color: var(--card-background);
+    padding: var(--spacing-xxl);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.main-content { /* Usado para centralizar cards de autenticação */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-xl);
+}
+
+.auth-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xxl);
+    color: var(--secondary-color); /* Cor para o ícone de usuário */
+}
+
+.auth-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-md);
+}
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+/* Formulários de Perfil */
+.form-group {
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-color-dark);
+}
+
+.form-group input {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-md);
+}
+
+.submit-btn { /* Botão de salvar no perfil */
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-md);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-color-hover);
+}
+
+
+/* Profile Container e Navegação */
+.profile-container {
+    max-width: 1000px;
+    width: 100%; 
+    margin: var(--spacing-xxl) auto;
+    display: flex;
+    background-color: var(--card-background);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    min-height: 60vh;
+    overflow: hidden;
+    flex-grow: 1; /* Permite que o container de perfil ocupe espaço */
+}
+
+.profile-nav {
+    flex: 0 0 220px;
+    background-color: #f1f3f5; /* Cor cinza mais clara para o nav lateral */
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid var(--border-color);
+}
+
+.nav-link {
+    display: block;
+    width: 100%; /* <-- ADICIONE ESTA LINHA */
+    box-sizing: border-box; /* <-- ADICIONE ESTA LINHA (BOA PRÁTICA) */
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    border-radius: var(--border-radius-pill);
+    text-align: center;
+    font-size: var(--fs-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: var(--secondary-color); /* Botões cinza padrão */
+    color: white;
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    background-color: #5a6268;
+    border: 1px solid transparent;
+}
+
+.nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--primary-color);
+}
+
+.logout-button {
+    margin-top: auto;
+}
+
+.profile-content {
+    flex-grow: 1;
+    padding: var(--spacing-xxl);
+    overflow-y: auto;
+    width: 100%;
+}
+
+.profile-content h2 {
+    font-size: var(--fs-xl);
+    color: var(--text-color-dark);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 2px solid var(--header-background-start); 
+    padding-bottom: var(--spacing-sm);
+}
+
+.profile-content p, .profile-content ul {
+    font-size: var(--fs-md);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-xl);
+}
+
+.profile-content ul {
+    list-style-position: inside;
+    padding-left: var(--spacing-lg);
+}
+
+
+
+.simple-card {
+    padding: var(--spacing-xl);
+    max-width: 680px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-radius-lg);
+    background-color: var(--card-background);
+    text-align: center;
+}
+.simple-card h1 {
+    font-size: var(--fs-xl);
+    margin-bottom: var(--spacing-lg);
+}
+.simple-card p {
+    margin-bottom: var(--spacing-md);
+    font-size: var(--fs-md);
+}
+.simple-card a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+
+
+.search-wrap {
+    margin-top: -48px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+.search-card {
+    width: min(1100px, 92vw);
+    background: var(--search-card-bg);
+    color: var(--search-card-text);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xxl);
+    box-shadow: var(--shadow-glow);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.search-grid {
+    display: grid;
+    gap: var(--spacing-xl);
+}
+@media (min-width: 900px) {
+    .search-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: end;
+    }
+}
+.field {
+    display: grid;
+    gap: var(--spacing-sm);
+}
+.field label {
+    font-size: var(--fs-sm);
+    color: #EBD2C3;
+    opacity: .95;
+}
+.field .value {
+    font-weight: 800;
+    font-size: var(--fs-xl);
+    color: #fff;
+}
+.field .line {
+    height: 1.5px;
+    background: var(--search-card-line);
+    opacity: .75;
+    margin-top: var(--spacing-xs);
+}
+
+
+.carousel {
+    margin: var(--spacing-xxl) auto;
+    width: min(1100px, 92vw);
+    position: relative;
+    padding-bottom: var(--spacing-xxxl); /* 56px */
+}
+.carousel .track {
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--border-radius-md); 
+    transition: transform .4s ease;
+}
+.carousel .slide {
+    flex: 0 0 100%;
+    position: relative;
+    transform: scale(.96);
+    transition: transform .3s ease, opacity .3s ease;
+}
+.carousel .slide.is-active {
+    transform: scale(1);
+}
+.carousel .slide.is-prev, .carousel .slide.is-next {
+    opacity: .92;
+}
+.carousel img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+}
+.carousel .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--border-radius-pill);
+    background: #fff;
+    color: var(--text-color-dark);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    display: grid;
+    place-items: center;
+}
+.carousel .prev {
+    left: -16px;
+}
+.carousel .next {
+    right: -16px;
+}
+@media (max-width: 900px) {
+    .carousel .prev {
+        left: var(--spacing-md);
+    }
+    .carousel .next {
+        right: var(--spacing-md);
+    }
+}
+.carousel .dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: var(--spacing-sm);
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    align-items: center;
+}
+.carousel .dot {
+    width: var(--spacing-md);
+    height: var(--spacing-md);
+    border-radius: var(--border-radius-pill);
+    border: 0;
+    background: #d1d5db;
+    cursor: pointer;
+}
+.carousel .dot.is-active {
+    width: var(--spacing-lg);
+    height: var(--spacing-lg);
+    background: var(--primary-color);
+}
+
+
+.featured {
+    width: min(1100px, 92vw);
+    margin: var(--spacing-xxl) auto var(--spacing-xl);
+}
+.featured h3 {
+    margin: 0 0 var(--spacing-lg);
+    font-size: var(--fs-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+.featured-row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 220px;
+    gap: var(--spacing-xl); 
+    overflow-x: auto;
+    padding-bottom: var(--spacing-sm);
+    scroll-snap-type: x mandatory;
+}
+.featured-card {
+    scroll-snap-align: start;
+    border-radius: var(--border-radius-md); 
+    background: var(--card-background);
+    box-shadow: var(--shadow-sm); 
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    display: block; 
+    color: inherit;
+}
+.featured-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    display: block;
+}
+.featured-card .fx {
+    padding: var(--spacing-md);
+}
+.featured-card .title {
+    font-weight: 800;
+}
+.featured-card .meta {
+    color: var(--secondary-color);
+    font-size: var(--fs-sm);
+    margin-top: var(--spacing-xs);
+}
+
+.filters-bar {
+    width: min(1100px, 92vw);
+    margin: var(--spacing-xl) auto var(--spacing-sm);
+    display: flex;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+.pill {
+    background: #EEF2FF; 
+    color: var(--text-color-dark);
+    border: 0;
+    border-radius: var(--border-radius-pill);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 600;
+}
+
+.events {
+    width: min(1100px, 92vw);
+    margin: var(--spacing-xxl) auto var(--spacing-xxl);
+}
+.event-grid {
+    display: grid;
+    gap: var(--spacing-xl); 
+}
+@media (min-width: 900px) {
+    .event-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+a.event-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius-lg); 
+    overflow: hidden;
+    box-shadow: var(--shadow-sm); 
+    border: 1px solid var(--border-color);
+    transition: transform .15s ease, box-shadow .15s ease;
+    display: block;
+    color: inherit;
+}
+a.event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+.event-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.event-card .body {
+    padding: var(--spacing-lg) var(--spacing-xl);
+}
+.event-card .date-badge {
+    color: var(--primary-color); 
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--fs-sm);
+}
+.event-card .row {
+    justify-content: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+.event-card .title {
+    font-weight: 800;
+    font-size: var(--fs-lg);
+}
+.event-card .uf {
+    font-weight: 700;
+    color: var(--secondary-color);
+    font-size: var(--fs-sm);
+}
+.event-card .desc {
+    color: var(--secondary-color);
+    font-size: var(--fs-sm);
+    margin-top: var(--spacing-sm);
+}
+
+/* VEJA MAIS */
+.see-more {
+    width: min(1100px, 92vw);
+    margin: var(--spacing-xl) auto var(--spacing-xxxl); /* Ajustado */
+    text-align: center;
+}
+.btn-outline { /* Botão de "Veja mais" */
+    background: var(--card-background);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 14px 28px;
+    border-radius: var(--border-radius-pill);
+    font-weight: 700;
+}
+.btn-outline:hover {
+    background: rgba(13, 110, 253, 0.06); /* Hover leve com a cor primária */
+}
+
+/* Adicione este estilo para que o botão de logout pareça um link */
+.logout-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit; /* Herda a fonte do elemento pai */
+    color: inherit; /* Herda a cor do elemento pai */
+    cursor: pointer;
+    text-align: center; /* Garante que o texto está alinhado */
+    display: inline; /* Garante que se comporte como texto */
+}
+
+.logout-button:hover {
+    /* Você pode adicionar um efeito de hover se quiser, como sublinhado ou mudança de cor */
+    text-decoration: underline; 
+}

@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+
+{% block title %}Buscar Evento{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 2rem 1rem;">
+
+    <h1>Buscar um Evento</h1>
+    <p>Digite o nome do evento que você está procurando.</p>
+
+    <form action="{% url 'resultado_busca' %}" method="GET" style="margin-top: 1.5rem;">
+        
+        <input type="text" name="termo_busca" placeholder="Ex: Show de Rock" style="padding: 10px; width: 300px; font-size: 1rem;">
+        
+        <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Buscar</button>
+
+    </form>
+    
+</div>
+{% endblock %}

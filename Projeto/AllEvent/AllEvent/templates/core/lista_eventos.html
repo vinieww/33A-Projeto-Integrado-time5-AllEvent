@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if termo_busca %}
+        Resultados para "{{ termo_busca }}"
+    {% else %}
+        Todos os Eventos
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 2rem 1rem;">
+>
+    {% if termo_busca %}
+        <h1>Resultados da busca por: "{{ termo_busca }}"</h1>
+        <p><a href="{% url 'lista_eventos' %}">Ver todos os eventos</a></p>
+    {% else %}
+        <h1>Todos os Eventos</h1>
+        <p>Explore o catálogo completo de eventos disponíveis.</p>
+    {% endif %}
+
+    <a href="{% url 'buscar_eventos' %}" class="btn btn-secondary" style="margin-top: 1rem; margin-bottom: 2rem; display: inline-block;">
+        🔍 Fazer uma busca específica
+    </a>
+    
+    <section class="events">
+        <div class="event-grid">
+          
+            {% for evento in eventos %}
+                <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
+                    <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
+                    <div class="body">
+                        <div class="date-badge">{{ evento.data|date:"M d" }}</div>
+                        <div class="row">
+                            <div class="title">{{ evento.nome }}</div>
+                            <div class="uf">{{ evento.local }}</div>
+                        </div>
+                        <p class="desc">{{ evento.descricao|truncatewords:10 }}</p>
+                    </div>
+                </a>
+            {% empty %}
+                <div style="grid-column: 1 / -1; text-align: center;">
+                    <p>Nenhum evento encontrado.</p>
+                    {% if termo_busca %}
+                        <p>Tente refazer sua busca com outros termos.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+    
+        </div>
+    </section>
+
+</div>
+{% endblock %}

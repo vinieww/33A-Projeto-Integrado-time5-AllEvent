@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferências - Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Referência ao novo CSS unificado com Django static -->
+<style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;          
+            width: 100%;                 
+        }
+
+        .logo a {
+            text-decoration: none; 
+            color: inherit;       
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header compact">
+        <div class="container header-container">
+            <h1 class="logo">
+                <a href="{% url 'home' %}">AllEvent</a>
+            </h1>
+            <a href="{% url 'perfil' %}" class="user-info">
+                <i class="fas fa-user-circle user-icon"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <aside class="profile-nav">
+            <div class="nav-links">
+               <a href="{% url 'editar_dados' %}" class="nav-link">Editar Dados</a>
+                <a href="{% url 'preferencias' %}" class="nav-link">Preferências</a>
+                <a href="{% url 'favoritos' %}" class="nav-link">Favoritos</a>
+            </div>
+            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+            {% csrf_token %}
+                 <button type="submit" class="nav-link logout-button">Log-out</button>
+            </form>
+        </aside>
+
+        <section class="profile-content">
+            <h2>Preferências</h2>
+            <p>Nesta seção, você pode configurar suas preferências de notificação, temas do site e outras configurações personalizadas.</p>
+            <p>Por exemplo, você pode escolher receber e-mails sobre:</p>
+            <ul>
+                <li>Eventos de Música</li>
+                <li>Eventos de Tecnologia</li>
+                <li>Eventos de Esportes</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+</html>
