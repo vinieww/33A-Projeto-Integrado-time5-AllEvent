@@ -1,46 +1,40 @@
-/* style.css - Arquivo CSS Homogeneizado */
 
-/* 1. Variáveis Globais (Tokens) */
 :root {
-    /* Cores */
-    --primary-color: #0d6efd; /* Azul principal */
-    --secondary-color: #6c757d; /* Cinza secundário */
-    --header-background-start: #F59E0B; /* Laranja do gradiente */
-    --header-background-end: #EA580C; /* Laranja mais escuro do gradiente */
-    --background-color: #f8f9fa; /* Fundo geral claro */
-    --card-background: #ffffff; /* Fundo dos cards */
-    --text-color-dark: #212529; /* Texto principal escuro */
-    --text-color-light: #f8f9fa; /* Texto claro (para fundos escuros) */
-    --border-color: #dee2e6; /* Cor de borda geral */
 
-    --accent-color: var(--primary-color); /* Usando primary-color como acento principal */
-    --accent-color-hover: #0b5ed7; /* Hover para o acento */
+    --primary-color: #0d6efd; 
+    --secondary-color: #6c757d; 
+    --header-background-start: #F59E0B;
+    --header-background-end: #EA580C; 
+    --background-color: #f8f9fa; 
+    --card-background: #ffffff; 
+    --text-color-dark: #212529;
+    --text-color-light: #f8f9fa; 
+    --border-color: #dee2e6; 
 
-    /* Cores do Card de Busca (mantido para a estética original da index) */
-    --search-card-bg: #6B3A0F; /* Marrom do card de busca */
-    --search-card-text: #F3E9E2; /* Texto do card de busca */
-    --search-card-line: #B78563; /* Linha do card de busca */
+    --accent-color: var(--primary-color); 
+    --accent-color-hover: #0b5ed7; 
 
-    /* Botões da Home (mantidos para a estética original da index) */
+    --search-card-bg: #6B3A0F; 
+    --search-card-text: #F3E9E2; 
+    --search-card-line: #B78563; 
+
     --btn-red: #DC2626;
     --btn-red-hover: #B91C1C;
     --btn-ghost-orange: #F97316;
     --btn-ghost-orange-hover: #EA580C;
 
-    /* Tipografia */
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-serif: "Playfair Display", Georgia, serif;
 
-    /* Tamanhos de Fonte */
     --fs-xs: 12px;
     --fs-sm: 14px;
     --fs-md: 16px;
     --fs-lg: 18px;
     --fs-xl: 24px;
-    --fs-xxl: 2.2rem; /* Ajustado para o tamanho do logo-text */
-    --fs-xxxl: 56px; /* Para o logo da index */
+    --fs-xxl: 2.2rem; 
+    --fs-xxxl: 56px; 
 
-    /* Espaçamentos e Raios */
+
     --spacing-xs: 4px;
     --spacing-sm: 8px;
     --spacing-md: 12px;
@@ -49,20 +43,19 @@
     --spacing-xxl: 32px;
     --spacing-xxxl: 56px;
 
-    --border-radius-sm: 5px; /* Para inputs e botões menores */
-    --border-radius-md: 8px; /* Para cards de autenticação */
-    --border-radius-lg: 16px; /* Para cards da home */
-    --border-radius-pill: 999px; /* Para botões arredondados */
+    --border-radius-sm: 5px; 
+    --border-radius-md: 8px; 
+    --border-radius-lg: 16px; 
+    --border-radius-pill: 999px; 
 
-    /* Sombras */
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05); /* Card de autenticação */
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25); /* Carrossel */
-    --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.16); /* Hover de cards */
-    --shadow-glow: 0 24px 38px rgba(124,58,237,.18); /* Card de busca */
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.25); 
+    --shadow-lg: 0 24px 50px rgba(0, 0, 0, 0.16); 
+    --shadow-glow: 0 24px 38px rgba(124,58,237,.18); 
 }
 
-/* 2. Reset Básico e Estilos Globais */
-* {
+{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -99,11 +92,10 @@ button {
     background: none;
 }
 
-/* Utilitários */
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--spacing-xl); /* Ajustado para consistência */
+    padding: 0 var(--spacing-xl); 
 }
 
 .row {
@@ -121,59 +113,55 @@ button {
     place-items: center;
 }
 
-.mt-xxl { margin-top: var(--spacing-xxl); } /* Exemplo de utilitário de margem */
+.mt-xxl { margin-top: var(--spacing-xxl); }
 
-/* 3. Estilos de Componentes Comuns */
-
-/* Header */
 .site-header {
     background: linear-gradient(135deg, var(--header-background-start), var(--header-background-end));
-    padding: var(--spacing-xxl) 0 calc(var(--spacing-xxxl) + 48px); /* Padding maior para a home */
+    padding: var(--spacing-xxl) 0 calc(var(--spacing-xxxl) + 48px); 
     position: relative;
     z-index: 1;
-    border-bottom: 1px solid var(--header-background-end); /* Borda consistente */
+    border-bottom: 1px solid var(--header-background-end); 
 }
 
-.site-header.compact { /* Para páginas de autenticação e perfil */
+.site-header.compact {
     padding: var(--spacing-md) var(--spacing-xl);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, var(--header-background-start), var(--header-background-end)); /* Manter gradiente */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra mais sutil */
+    background: linear-gradient(135deg, var(--header-background-start), var(--header-background-end)); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .site-header .logo-text,
-.site-header .logo { /* Unificando o estilo do logo */
+.site-header .logo { 
     font-family: var(--font-serif);
-    font-weight: 700; /* Originalmente 700, mantido. Index usava 800 */
-    font-size: var(--fs-xxl); /* Tamanho grande e elegante */
+    font-weight: 700; 
+    font-size: var(--fs-xxl); 
     color: white;
     letter-spacing: .3px;
     line-height: 1;
 }
 
 .site-header .tagline {
-    color: #FFF7ED; /* Cor original da tagline */
+    color: #FFF7ED;
     opacity: .95;
     margin-top: 6px;
     font-size: var(--fs-sm);
 }
 
-.site-header .nav { /* Estilo para a navegação da header na home */
+.site-header .nav { 
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-lg);
 }
 
-/* User Info na header do perfil */
 .user-info {
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
     font-size: var(--fs-lg);
-    color: white; /* Cor do texto no header */
+    color: white;
     text-decoration: none;
     transition: opacity 0.2s ease-in-out;
 }
@@ -181,10 +169,9 @@ button {
     opacity: 0.8;
 }
 .user-icon {
-    font-size: 2em; /* Relativo ao font-size do .user-info */
+    font-size: 2em; 
 }
 
-/* Botões (geral) */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -198,7 +185,7 @@ button {
     text-align: center;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
-    border: 1px solid transparent; /* Adicionado para consistência */
+    border: 1px solid transparent; 
 }
 
 .btn-primary {
@@ -221,12 +208,11 @@ button {
     opacity: 0.9;
 }
 
-/* Botões específicos da Home */
 .btn-ghost {
     color: #fff;
     border: 1.5px solid var(--btn-ghost-orange);
     background: transparent;
-    padding: 10px 16px; /* Padding específico para este botão */
+    padding: 10px 16px; 
 }
 .btn-ghost:hover {
     background: rgba(255,255,255,.08);
@@ -241,15 +227,15 @@ button {
     place-items: center;
     border: 1.5px solid rgba(255,255,255,.6);
     color: #fff;
-    padding: 0; /* Remover padding padrão para um botão de ícone */
+    padding: 0; 
 }
 
-.btn.btn-home-primary { /* Para diferenciar o "SEU EVENTO" da home */
+.btn.btn-home-primary {
     background: var(--btn-red);
     color: #fff;
     padding: 10px 20px;
     font-weight: 700;
-    border-color: var(--btn-red); /* Adicionar borda para consistência */
+    border-color: var(--btn-red); 
 }
 .btn.btn-home-primary:hover {
     background: var(--btn-red-hover);
@@ -257,7 +243,6 @@ button {
 }
 
 
-/* Form Card (Auth e outras páginas simples) */
 .auth-card {
     background-color: var(--card-background);
     padding: var(--spacing-xxl);
@@ -269,7 +254,7 @@ button {
     text-align: center;
 }
 
-.main-content { /* Usado para centralizar cards de autenticação */
+.main-content { 
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -280,7 +265,7 @@ button {
 .auth-icon {
     font-size: 2.5rem;
     margin-bottom: var(--spacing-xxl);
-    color: var(--secondary-color); /* Cor para o ícone de usuário */
+    color: var(--secondary-color);
 }
 
 .auth-form input {
@@ -298,7 +283,6 @@ button {
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
 }
 
-/* Formulários de Perfil */
 .form-group {
     margin-bottom: var(--spacing-xl);
 }
@@ -318,7 +302,7 @@ button {
     font-size: var(--fs-md);
 }
 
-.submit-btn { /* Botão de salvar no perfil */
+.submit-btn {
     background-color: var(--primary-color);
     color: white;
     padding: var(--spacing-md) var(--spacing-xl);
@@ -334,7 +318,6 @@ button {
 }
 
 
-/* Profile Container e Navegação */
 .profile-container {
     max-width: 1000px;
     width: 100%; 
@@ -345,12 +328,12 @@ button {
     box-shadow: var(--shadow-sm);
     min-height: 60vh;
     overflow: hidden;
-    flex-grow: 1; /* Permite que o container de perfil ocupe espaço */
+    flex-grow: 1; 
 }
 
 .profile-nav {
     flex: 0 0 220px;
-    background-color: #f1f3f5; /* Cor cinza mais clara para o nav lateral */
+    background-color: #f1f3f5;
     padding: var(--spacing-xl);
     display: flex;
     flex-direction: column;
@@ -360,8 +343,8 @@ button {
 
 .nav-link {
     display: block;
-    width: 100%; /* <-- ADICIONE ESTA LINHA */
-    box-sizing: border-box; /* <-- ADICIONE ESTA LINHA (BOA PRÁTICA) */
+    width: 100%; 
+    box-sizing: border-box; 
     padding: var(--spacing-md) var(--spacing-lg);
     margin-bottom: var(--spacing-sm);
     border-radius: var(--border-radius-pill);
@@ -370,7 +353,7 @@ button {
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-    background-color: var(--secondary-color); /* Botões cinza padrão */
+    background-color: var(--secondary-color); 
     color: white;
     text-decoration: none;
     border: 1px solid transparent;
@@ -495,7 +478,7 @@ button {
     margin: var(--spacing-xxl) auto;
     width: min(1100px, 92vw);
     position: relative;
-    padding-bottom: var(--spacing-xxxl); /* 56px */
+    padding-bottom: var(--spacing-xxxl); 
 }
 .carousel .track {
     display: flex;
@@ -703,13 +686,12 @@ a.event-card:hover {
     margin-top: var(--spacing-sm);
 }
 
-/* VEJA MAIS */
 .see-more {
     width: min(1100px, 92vw);
-    margin: var(--spacing-xl) auto var(--spacing-xxxl); /* Ajustado */
+    margin: var(--spacing-xl) auto var(--spacing-xxxl); 
     text-align: center;
 }
-.btn-outline { /* Botão de "Veja mais" */
+.btn-outline { 
     background: var(--card-background);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
@@ -718,22 +700,26 @@ a.event-card:hover {
     font-weight: 700;
 }
 .btn-outline:hover {
-    background: rgba(13, 110, 253, 0.06); /* Hover leve com a cor primária */
+    background: rgba(13, 110, 253, 0.06); 
 }
 
-/* Adicione este estilo para que o botão de logout pareça um link */
+
 .logout-button {
     background: none;
     border: none;
     padding: 0;
-    font: inherit; /* Herda a fonte do elemento pai */
-    color: inherit; /* Herda a cor do elemento pai */
+    font: inherit; 
+    color: inherit; 
     cursor: pointer;
-    text-align: center; /* Garante que o texto está alinhado */
-    display: inline; /* Garante que se comporte como texto */
+    text-align: center; 
+    display: inline; 
 }
 
 .logout-button:hover {
-    /* Você pode adicionar um efeito de hover se quiser, como sublinhado ou mudança de cor */
     text-decoration: underline; 
+}
+
+.auth-form .btn {
+    width: 100%;
+    margin-bottom: 10px;
 }
