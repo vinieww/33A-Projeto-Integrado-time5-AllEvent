@@ -207,15 +207,25 @@ button {
     opacity: 0.9;
 }
 
+
 .btn-ghost {
     color: #fff;
-    border: 1.5px solid var(--btn-ghost-orange);
+    border: 1.5px solid #ffffff; 
+    
     background: transparent;
     padding: 10px 16px; 
+    
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 600;
 }
+
 .btn-ghost:hover {
-    background: rgba(255,255,255,.08);
-    border-color: var(--btn-ghost-orange-hover);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffffff;
 }
 
 .btn-icon {
@@ -964,31 +974,35 @@ a.event-card:hover {
     text-decoration: none; 
 }
 
+.messages-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;             
+    
+    width: 100%;
+    max-width: 1200px;      
+    margin: 20px auto;     
+    padding: 0 var(--spacing-xl); 
+}
+
 
 .alert {
     padding: 15px;
-    margin-bottom: 15px;
     border-radius: var(--border-radius-md);
-    font-weight: 500;
+    font-weight: 600;
     color: white;
     box-shadow: var(--shadow-sm);
+    
+
+    margin-bottom: 0; 
 }
+
 
 .alert-error {
     background-color: var(--btn-red);
     border: 1px solid var(--btn-red-hover);
 }
 
-
-.alert-success {
-    background-color: #198754;
-    border: 1px solid #157347;
-}
-
-.alert-warning {
-    background-color: #ffc107;
-    color: #000;
-}
-.alert-info {
-    background-color: var(--primary-color);
+.messages-container .alert:not(:first-child) {
+    display: none;
 }

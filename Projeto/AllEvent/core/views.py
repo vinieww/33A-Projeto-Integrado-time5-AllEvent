@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Evento 
 from django.shortcuts import render, get_object_or_404
-
+from django.contrib.messages import get_messages 
+from django.urls import reverse
 def home(request):
 
     eventos_recentes = Evento.objects.order_by('-data')[:8]
@@ -20,6 +21,7 @@ def home(request):
 def cadastro(request):
     if request.user.is_authenticated:
         return redirect('home')
+
     if request.method == 'POST':
         nome = request.POST.get('nome_completo')
         email = request.POST.get('email')
@@ -29,6 +31,7 @@ def cadastro(request):
         if senha != senha_confirm:
             messages.error(request, 'As senhas não coincidem!')
             return redirect('cadastro')
+            
         if User.objects.filter(email=email).exists():
             messages.error(request, 'Este e-mail já está em uso.')
             return redirect('cadastro')
@@ -39,7 +42,15 @@ def cadastro(request):
         login(request, user)
         messages.success(request, 'Conta criada com sucesso!')
         return redirect('home')
-    return render(request, 'core/cadastro.html') 
+
+    
+    contexto = {
+        'compact_header': True,      
+        'hide_header_buttons': True
+    }
+    
+
+    return render(request, 'core/cadastro.html', contexto)
 
 @login_required
 def perfil_view(request):
@@ -112,6 +123,9 @@ def resultado_busca(request):
 def detalhe_evento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     
+    if request.GET.get('erro') == 'login':
+        messages.error(request, "Você precisa estar logado para favoritar eventos.")
+
     esta_favoritado = False
     if request.user.is_authenticated:
         if evento.favoritos.filter(id=request.user.id).exists():
@@ -120,16 +134,18 @@ def detalhe_evento(request, evento_id):
     contexto = {
         'evento': evento,
         'compact_header': True,
-        'esta_favoritado': esta_favoritado  
+        'esta_favoritado': esta_favoritado
     }
     return render(request, 'core/detalhe_evento.html', contexto)
 
 def toggle_favorito(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     
+
     if not request.user.is_authenticated:
-        messages.error(request, "Você precisa estar logado para favoritar eventos.")
-        return redirect('detalhe_evento', evento_id=evento_id)
+       
+        url = reverse('detalhe_evento', args=[evento_id])
+        return redirect(f'{url}?erro=login')
 
 
     if evento.favoritos.filter(id=request.user.id).exists():

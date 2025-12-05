@@ -1,42 +1,69 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro - AllEvent</title>
+{% extends "base.html" %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header class="site-header compact">
-        <div class="logo-text">AllEvent</div>
-    </header>
+{% block title %}Criar Conta - AllEvent{% endblock %}
 
-    <main class="main-content">
-        <form class="auth-form" method="POST"> 
-    {% csrf_token %}
+{% block content %}
 
+<main class="main-content">
+    <div class="auth-card">
+        
+        <div class="auth-icon" style="margin-bottom: 16px;">
+            <i class="fas fa-user-plus"></i>
+        </div>
+        
+        <h2 style="margin-bottom: 24px; color: var(--text-color-dark);">Crie sua conta</h2>
 
-    <input type="text" name="nome_completo" placeholder="Nome completo" required>
-    <input type="email" name="email" placeholder="E-mail" required>
-    <input type="password" name="password" placeholder="Senha" required>
-    <input type="password" name="password_confirm" placeholder="Confirme a senha" required>
-    
-    <button type="submit" class="btn btn-primary">CRIAR CONTA</button>
-</form>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="text-align: left; font-size: 0.9rem;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
-    {% if messages %}
-    <div style="margin-top: 15px;">
-         {% for message in messages %}
-                    <p style="color: red; font-weight: bold;">{{ message }}</p>
-                {% endfor %}
+        <form class="auth-form" method="POST">
+            {% csrf_token %}
+            <div style="text-align: left; margin-bottom: 20px;">
+                
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 4px; display:block;">Nome Completo</label>
+                    <input type="text" name="nome_completo" placeholder="Ex: João Silva" required 
+                           style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 4px; display:block;">E-mail</label>
+                    <input type="email" name="email" placeholder="seu@email.com" required
+                           style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 4px; display:block;">Senha</label>
+                    <input type="password" name="password" placeholder="Crie uma senha forte" required
+                           style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 4px; display:block;">Confirme a Senha</label>
+                    <input type="password" name="password_confirm" placeholder="Repita a senha" required
+                           style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+                </div>
+
             </div>
-    {% endif %}
-    </main>
-</body>
-</html>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 16px;">
+                CRIAR CONTA
+            </button>
+        </form>
+
+        <p style="font-size: 0.9rem; color: var(--secondary-color);">
+            Já tem uma conta? 
+            <a href="{% url 'login' %}" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">
+                Entrar
+            </a>
+        </p>
+
+    </div>
+</main>
+
+{% endblock %}

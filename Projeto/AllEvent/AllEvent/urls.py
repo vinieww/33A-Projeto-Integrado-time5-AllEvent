@@ -3,12 +3,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from core import views
+from django.contrib.auth import views as auth_views 
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('accounts/login/', auth_views.LoginView.as_view(extra_context={'compact_header': True, 'hide_header_buttons': True}), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('', views.home, name='home'), 
