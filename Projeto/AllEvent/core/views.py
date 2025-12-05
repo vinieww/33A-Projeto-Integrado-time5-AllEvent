@@ -79,7 +79,12 @@ def editar_dados(request):
 
 @login_required
 def favoritos_view(request):
-    return render(request, 'core/favoritos.html')
+    eventos_favoritados = request.user.eventos_favoritos.all()
+    
+    contexto = {
+        'eventos': eventos_favoritados
+    }
+    return render(request, 'core/favoritos.html', contexto)
 
 @login_required
 def preferencias_view(request):
@@ -107,8 +112,29 @@ def resultado_busca(request):
 def detalhe_evento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     
+    esta_favoritado = False
+    if request.user.is_authenticated:
+        if evento.favoritos.filter(id=request.user.id).exists():
+            esta_favoritado = True
+    
     contexto = {
         'evento': evento,
-        'compact_header': True
+        'compact_header': True,
+        'esta_favoritado': esta_favoritado  
     }
     return render(request, 'core/detalhe_evento.html', contexto)
+
+def toggle_favorito(request, evento_id):
+    evento = get_object_or_404(Evento, pk=evento_id)
+    
+    if not request.user.is_authenticated:
+        messages.error(request, "Você precisa estar logado para favoritar eventos.")
+        return redirect('detalhe_evento', evento_id=evento_id)
+
+
+    if evento.favoritos.filter(id=request.user.id).exists():
+        evento.favoritos.remove(request.user)
+    else:
+        evento.favoritos.add(request.user)
+
+    return redirect('detalhe_evento', evento_id=evento_id)

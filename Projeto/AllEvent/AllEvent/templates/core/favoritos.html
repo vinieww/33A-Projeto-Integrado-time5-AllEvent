@@ -49,8 +49,41 @@
 
         <section class="profile-content">
             <h2>Favoritos</h2>
-            <p>Aqui estão todos os eventos que você marcou como favoritos. Você pode visualizar, gerenciar e remover eventos da sua lista.</p>
-             <p>Ainda não há eventos favoritos. Explore o site e adicione alguns!</p>
+            <p>Aqui estão todos os eventos que você marcou como favoritos.</p>
+
+            <div class="event-grid" style="margin-top: 24px;">
+                
+                {% for evento in eventos %}
+                    <a href="{% url 'detalhe_evento' evento.id %}" class="event-card">
+                        {% if evento.imagem %}
+                            <img src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
+                        {% else %}
+                            <div style="height: 220px; background-color: #eee; display: flex; align-items: center; justify-content: center; color: #888;">
+                                <i class="fas fa-image fa-2x"></i>
+                            </div>
+                        {% endif %}
+
+                        <div class="body">
+                            <div class="date-badge">
+                                {{ evento.data|date:"d/m/Y" }}
+                            </div>
+                            <div class="title">
+                                {{ evento.nome }}
+                            </div>
+                            <div class="uf">
+                                <i class="fas fa-map-marker-alt"></i> {{ evento.local }}
+                            </div>
+                        </div>
+                    </a>
+                {% empty %}
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #f9fafb; border-radius: 8px;">
+                        <i class="far fa-heart fa-3x" style="color: #ccc; margin-bottom: 16px;"></i>
+                        <p style="color: #666;">Você ainda não favoritou nenhum evento.</p>
+                        <a href="{% url 'lista_eventos' %}" style="color: var(--primary-color); text-decoration: underline; font-weight: bold;">Explorar eventos</a>
+                    </div>
+                {% endfor %}
+
+            </div>
         </section>
     </main>
 

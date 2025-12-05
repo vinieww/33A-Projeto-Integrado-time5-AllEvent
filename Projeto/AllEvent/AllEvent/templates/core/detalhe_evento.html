@@ -29,12 +29,10 @@
                 
                 <div class="scrollable-content">
                     {% if evento.imagem %}
-                        <!-- A imagem está AQUI, ANTES do texto -->
                         <img src="{{ evento.imagem.url }}" alt="..." class="event-image">
                     {% endif %}
 
-                    {% if evento.descricao %}
-                        <!-- O texto vem DEPOIS, então ele vai fluir ao redor da imagem -->
+                    {% if evento.descricao %}>
                         <p>{{ evento.descricao|linebreaks }}</p>
                     {% endif %}
                 </div>
@@ -50,12 +48,8 @@
         </aside>
 
     </main>
-
-    <!-- RODAPÉ FIXO NO FUNDO DO CARD -->
-    <!-- Como está fora do .scrollable-content, ele nunca será escondido pela rolagem -->
     <footer class="event-actions">
         
-        <!-- Esquerda -->
         <a href="{% url 'lista_eventos' %}"
            class="back-link"
            title="Voltar para a lista"
@@ -63,8 +57,18 @@
             &larr;
         </a>
 
-        <!-- Direita -->
-        <button class="favorite-button" title="Favoritar">♡</button>
+        <form action="{% url 'toggle_favorito' evento.id %}" method="POST" style="margin: 0;">
+            {% csrf_token %}
+            <button type="submit" class="favorite-button" title="{% if esta_favoritado %}Remover dos Favoritos{% else %}Adicionar aos Favoritos{% endif %}">
+                
+                {% if esta_favoritado %}
+                    <i class="fas fa-heart" style="color: var(--btn-red);"></i>
+                {% else %}
+                    <i class="far fa-heart"></i>
+                {% endif %}
+
+            </button>
+        </form>
         
     </footer>
 

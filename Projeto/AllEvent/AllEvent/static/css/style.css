@@ -748,7 +748,10 @@ a.event-card:hover {
     padding: var(--spacing-xl) var(--spacing-xxl);
 }
 
-.event-banner__name { flex-grow: 1; }
+.event-banner__name { 
+    flex-grow: 1; 
+}
+
 .event-banner__name h1 {
     font-family: var(--font-serif);
     font-size: var(--fs-xxl);
@@ -771,8 +774,14 @@ a.event-card:hover {
     font-size: var(--fs-md); 
     padding-bottom: var(--spacing-sm); 
 }
-.event-banner__details p { margin: 0; color: var(--search-card-text); }
-.event-banner__details strong { color: #ffffff; } 
+.event-banner__details p { 
+    margin: 0; 
+    color: var(--search-card-text); 
+}
+
+.event-banner__details strong { 
+    color: #ffffff; 
+} 
 
 
 .event-banner__rating {
@@ -782,7 +791,13 @@ a.event-card:hover {
     padding-bottom: var(--spacing-sm); 
 }
 
-.event-content { display: flex; flex-wrap: wrap; padding: var(--spacing-xxl); gap: var(--spacing-xxl); }
+.event-content { 
+    display: flex; 
+    flex-wrap: wrap; 
+    padding: var(--spacing-xxl); 
+    gap: var(--spacing-xxl); 
+}
+
 .event-content__main { 
     flex: 2;
     min-width: 300px;
@@ -840,11 +855,33 @@ a.event-card:hover {
     font-size: 0.9em; 
 }
 
-.event-content__main p { line-height: 1.7; font-size: var(--fs-md); }
+.event-content__main p { 
+    line-height: 1.7; 
+    font-size: var(--fs-md); 
+}
 
-.event-content__sidebar { flex: 1; min-width: 280px; border-left: 1px solid var(--border-color); padding-left: var(--spacing-xxl); }
-.event-content__sidebar h2 { font-size: var(--fs-xl); margin-bottom: var(--spacing-lg); }
-.comments-placeholder { background-color: var(--background-color); padding: var(--spacing-lg); border-radius: var(--border-radius-sm); height: 400px; overflow-y: auto; border: 1px solid var(--border-color); color: var(--secondary-color); display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.event-content__sidebar { 
+    flex: 1; 
+    min-width: 280px; 
+    border-left: 1px solid var(--border-color); 
+    padding-left: var(--spacing-xxl); 
+}
+
+.event-content__sidebar h2 { 
+    font-size: var(--fs-xl); 
+    margin-bottom: var(--spacing-lg); 
+}
+
+.comments-placeholder { 
+    background-color: var(--background-color); 
+    padding: var(--spacing-lg); border-radius: 
+    var(--border-radius-sm); height: 400px; 
+    overflow-y: auto; 
+    border: 1px solid var(--border-color);
+    color: var(--secondary-color); display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    text-align: center; }
 
 
 .event-actions {
@@ -863,7 +900,9 @@ a.event-card:hover {
     color: var(--secondary-color);
     transition: color 0.2s, transform 0.2s;
 }
-.favorite-button:hover { color: var(--btn-red); transform: scale(1.1); }
+.favorite-button:hover {
+     color: var(--btn-red); transform: scale(1.1); 
+    }
 
 .scrollable-content {
     max-height: 400px; 
@@ -873,10 +912,21 @@ a.event-card:hover {
     margin-bottom: 0; 
 }
 
-.scrollable-content::-webkit-scrollbar { width: 8px; }
-.scrollable-content::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
-.scrollable-content::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
-.scrollable-content::-webkit-scrollbar-thumb:hover { background: #aaa; }
+.scrollable-content::-webkit-scrollbar {
+     width: 8px; 
+}
+
+.scrollable-content::-webkit-scrollbar-track { 
+    background: #f1f1f1; border-radius: 10px; 
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+     background: #ccc; border-radius: 10px; 
+}
+    
+.scrollable-content::-webkit-scrollbar-thumb:hover { 
+    background: #aaa; 
+}
 
 
 .event-content__main {
@@ -912,4 +962,33 @@ a.event-card:hover {
     background-color: var(--accent-color-hover);
     transform: scale(1.05);
     text-decoration: none; 
+}
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.alert-error {
+    background-color: var(--btn-red);
+    border: 1px solid var(--btn-red-hover);
+}
+
+
+.alert-success {
+    background-color: #198754;
+    border: 1px solid #157347;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: #000;
+}
+.alert-info {
+    background-color: var(--primary-color);
 }

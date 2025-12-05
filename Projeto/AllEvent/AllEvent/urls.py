@@ -24,6 +24,7 @@ urlpatterns = [
     path('eventos/buscar/', views.buscar_eventos, name='buscar_eventos'),
     path('eventos/resultado/', views.resultado_busca, name='resultado_busca'),
     path('evento/<int:evento_id>/', views.detalhe_evento, name='detalhe_evento'),
+    path('evento/<int:evento_id>/toggle_favorito/', views.toggle_favorito, name='toggle_favorito'),
 ]
 
 if settings.DEBUG:
