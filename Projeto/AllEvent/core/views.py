@@ -108,6 +108,7 @@ def detalhe_evento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     
     contexto = {
-        'evento': evento
+        'evento': evento,
+        'compact_header': True
     }
     return render(request, 'core/detalhe_evento.html', contexto)

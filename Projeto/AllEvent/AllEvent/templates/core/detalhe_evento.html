@@ -1,25 +1,70 @@
-
 {% extends "base.html" %}
 
 {% block title %}{{ evento.nome }}{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 2rem 1rem;">
 
-    <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">{{ evento.nome }}</h1>
-    
-    <div style="font-size: 1.2rem; color: #555;">
-        <p><strong>Local:</strong> {{ evento.local }}</p>
-        <p><strong>Quando:</strong> {{ evento.data|date:"d \d\e F \d\e Y, H:i" }}</p>
-    </div>
+<div class="event-detail-page">
 
-    {% if evento.descricao %}
-        <hr style="margin: 2rem 0;">
-        <h3>Sobre o Evento</h3>
-        <p style="line-height: 1.6;">{{ evento.descricao }}</p>
-    {% endif %}
+    <header class="event-banner">
+        <div class="event-banner__name">
+            <h1>{{ evento.nome }}</h1>
+        </div>
+        <div class="banner-separator"></div>
+        <div class="event-banner__details">
+            <p><strong>Local:</strong> {{ evento.local }}</p>
+            <p><strong>Quando:</strong> {{ evento.data|date:"d/m/Y, H:i" }}</p>
+        </div>
+        <div class="event-banner__rating">
+            <p>★★★★☆</p>
+        </div>
+    </header>
 
-    <a href="{% url 'lista_eventos' %}" style="display: inline-block; margin-top: 2rem;">&larr; Voltar para a lista de eventos</a>
+    <main class="event-content">
+        
+        <div class="event-content__main">
+
+            <h2><i class="fas fa-info-circle"></i> Sobre o Evento</h2>
+
+            <div class="main-content-wrapper">
+
+                <div class="scrollable-content">
+
+                    {% if evento.imagem %}
+                        <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}" class="event-image">
+                    {% endif %}
+
+                    {% if evento.descricao %}
+                        <p>{{ evento.descricao|linebreaks }}</p>
+                    {% else %}
+                        <p>Nenhuma descrição detalhada disponível para este evento.</p>
+                    {% endif %}
+                </div>
+
+                <a href="{% url 'lista_eventos' %}"
+                class="back-link"
+                title="Voltar para a lista de eventos"
+                aria-label="Voltar para a lista de eventos">
+                    &larr;
+                </a>
+
+            </div>
+
+        </div>
+
+        <aside class="event-content__sidebar">
+            <h2>Comentários</h2>
+            <div class="comments-placeholder">
+                <p>A seção de comentários estará disponível em breve!</p>
+            </div>
+        </aside>
+
+    </main>
+
+    <footer class="event-actions">
+        <button class="favorite-button" title="Adicionar aos Favoritos (em breve)">♡</button>
+    </footer>
 
 </div>
+
 {% endblock %}
