@@ -9,6 +9,9 @@ from .models import Evento
 from django.shortcuts import render, get_object_or_404
 from django.contrib.messages import get_messages 
 from django.urls import reverse
+from django.views.decorators.cache import never_cache
+from django.utils.decorators import method_decorator
+
 def home(request):
 
     eventos_recentes = Evento.objects.order_by('-data')[:8]
@@ -17,7 +20,7 @@ def home(request):
     }
     return render(request, 'core/home.html', contexto)
 
-
+@never_cache
 def cadastro(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -119,7 +122,7 @@ def resultado_busca(request):
     contexto = {'eventos': eventos_filtrados, 'termo_busca': termo}
     return render(request, 'core/lista_eventos.html', contexto)
 
-
+@never_cache
 def detalhe_evento(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     

@@ -1,25 +1,50 @@
 {% extends "base.html" %}
 
+{% block title %}Entrar - AllEvent{% endblock %}
+
 {% block content %}
 
 <main class="main-content">
     <div class="auth-card">
-        <div class="auth-icon">👤</div>
+        <div class="auth-icon" style="margin-bottom: 16px;">
+            <i class="fas fa-user"></i>
+        </div>
+
+        <h2 style="margin-bottom: 24px; color: var(--text-color-dark);">Acesse sua conta</h2>
 
         {% if form.errors %}
-            <p style="color: red; font-weight: bold; margin-bottom: 15px;">
-                Usuário ou senha inválidos. Por favor, tente novamente.
-            </p>
+            <div class="alert alert-error" style="text-align: left; font-size: 0.9rem; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>E-mail ou senha incorretos. Tente novamente.</span>
+            </div>
         {% endif %}
 
         <form class="auth-form" method="POST">
             {% csrf_token %}
             
-            {{ form.as_p }}
+            <div style="text-align: left; margin-bottom: 16px;">
+                <label for="id_username" style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 4px; display:block;">E-mail</label>
+                <input type="text" name="username" id="id_username" placeholder="Digite seu e-mail" required autofocus
+                       style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+            </div>
+            <div style="text-align: left; margin-bottom: 24px;">
+                <label for="id_password" style="font-size: 14px; font-weight: 600; color: #666; margin-bottom: 4px; display:block;">Senha</label>
+                <input type="password" name="password" id="id_password" placeholder="Digite sua senha" required
+                       style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+            </div>
 
-            <button type="submit" class="btn btn-primary">ENTRAR</button>
-            <a href="{% url 'cadastro' %}" class="btn btn-secondary">CADASTRAR-SE</a>
-            <a href="{% url 'password_reset' %}" class="btn btn-secondary">ESQUECI A SENHA</a>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-bottom: 10px;">
+                ENTRAR
+            </button>
+            
+            <a href="{% url 'cadastro' %}" class="btn btn-secondary" style="width: 100%; margin-bottom: 20px;">
+                CADASTRAR-SE
+            </a>
+            <div>
+                <a href="{% url 'password_reset' %}" style="font-size: 0.9rem; color: var(--secondary-color); text-decoration: underline;">
+                    Esqueci a senha
+                </a>
+            </div>
         </form>
     </div>
 </main>

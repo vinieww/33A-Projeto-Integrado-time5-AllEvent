@@ -753,7 +753,7 @@ a.event-card:hover {
     justify-content: space-between;
     align-items: flex-end; 
     gap: var(--spacing-lg);
-    background-color: var(--search-card-bg); 
+    background: linear-gradient(135deg, #e4950d, #b4460b);
     color: var(--text-color-light);
     padding: var(--spacing-xl) var(--spacing-xxl);
 }
