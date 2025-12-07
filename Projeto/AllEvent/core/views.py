@@ -1,19 +1,15 @@
-
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Evento 
-from django.shortcuts import render, get_object_or_404
-from django.contrib.messages import get_messages 
 from django.urls import reverse
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import never_cache # Corrigido (estava never_cachea)
 from django.utils.decorators import method_decorator
+from django.db.models import Q # NOVO: Necessário para fazer a busca "OU" (Nome OU Categoria)
+from .models import Evento
 
 def home(request):
-
     eventos_recentes = Evento.objects.order_by('-data')[:8]
     contexto = {
         'eventos_carousel': eventos_recentes
@@ -46,13 +42,11 @@ def cadastro(request):
         messages.success(request, 'Conta criada com sucesso!')
         return redirect('home')
 
-    
     contexto = {
         'compact_header': True,      
         'hide_header_buttons': True
     }
     
-
     return render(request, 'core/cadastro.html', contexto)
 
 @login_required
@@ -115,12 +109,21 @@ def buscar_eventos(request):
 
 def resultado_busca(request):
     termo = request.GET.get('termo_busca', '')
+    
     if termo:
-        eventos_filtrados = Evento.objects.filter(nome__icontains=termo)
+        # ATUALIZAÇÃO IMPORTANTE:
+        # Busca no nome do evento OU ( | ) no nome da categoria
+        eventos_filtrados = Evento.objects.filter(
+            Q(nome__icontains=termo) | 
+            Q(categoria__nome__icontains=termo)
+        )
     else:
         eventos_filtrados = []
+        
     contexto = {'eventos': eventos_filtrados, 'termo_busca': termo}
-    return render(request, 'core/lista_eventos.html', contexto)
+    
+    # Mudei aqui para renderizar o arquivo novo que criamos (resultado_busca.html)
+    return render(request, 'core/resultado_busca.html', contexto)
 
 @never_cache
 def detalhe_evento(request, evento_id):
@@ -144,12 +147,9 @@ def detalhe_evento(request, evento_id):
 def toggle_favorito(request, evento_id):
     evento = get_object_or_404(Evento, pk=evento_id)
     
-
     if not request.user.is_authenticated:
-       
         url = reverse('detalhe_evento', args=[evento_id])
         return redirect(f'{url}?erro=login')
-
 
     if evento.favoritos.filter(id=request.user.id).exists():
         evento.favoritos.remove(request.user)

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Resultados da Busca{% endblock %}
+
+{% block content %}
+<style>
+    /* O mesmo estilo de etiqueta que usamos na Home */
+    .category-badge {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    
+    /* Um ajuste simples para o grid de resultados */
+    .results-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container" style="padding: 2rem 1rem;">
+
+    <h1>Resultados para: "{{ request.GET.termo_busca }}"</h1>
+    
+    <div class="results-grid">
+        {% for evento in eventos %}
+            <div class="card" style="width: 300px; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                
+                {% if evento.imagem %}
+                    <img src="{{ evento.imagem.url }}" alt="{{ evento.nome }}" style="width: 100%; height: 200px; object-fit: cover;">
+                {% endif %}
+
+                <div class="card-body" style="padding: 15px;">
+                    
+                    {% if evento.categoria %}
+                        <div class="category-badge">{{ evento.categoria.nome }}</div>
+                    {% endif %}
+                    
+                    <h3 style="margin: 10px 0; font-size: 1.2rem;">{{ evento.nome }}</h3>
+                    <p style="color: #666;">{{ evento.data|date:"d M Y" }}</p>
+                    <p style="color: #666;">{{ evento.local }}</p>
+                    
+                    <a href="{% url 'detalhe_evento' evento.id %}" class="btn btn-primary" style="display: block; text-align: center; margin-top: 10px; text-decoration: none;">
+                        Ver Detalhes
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="no-results" style="width: 100%; text-align: center; margin-top: 50px;">
+                <h3>Nenhum evento encontrado.</h3>
+                <p>Tente buscar por outro termo ou categoria (Ex: Teatro, Sertanejo).</p>
+                <a href="{% url 'home' %}" class="btn" style="text-decoration: underline; color: #007bff;">Voltar para Home</a>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

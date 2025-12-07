@@ -80,10 +80,25 @@
     
     .carousel .event-card img {
         height: 250px; 
+        object-fit: cover; 
+    }
+
+    .category-badge {
+        display: inline-block;
+        background-color: #007bff; /* Azul padrão, pode mudar se quiser */
+        color: white;
+        font-size: 0.75rem; /* Letra um pouco menor */
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 8px; /* Espaço entre a etiqueta e a data */
+        letter-spacing: 0.5px;
     }
   </style>
 </head>
 <body>
+
   <header class="site-header">
     <div class="container nav">
       <div class="brand">
@@ -106,7 +121,7 @@
         <i class="fas fa-bars"></i>
       </a>
       <form class="home-search-form" action="{% url 'resultado_busca' %}" method="GET">
-        <input type="text" name="termo_busca" class="home-search-input" placeholder="Pesquisar por evento...">
+        <input type="text" name="termo_busca" class="home-search-input" placeholder="Pesquisar por evento ou categoria (Ex: Rock)...">
         <button type="submit" class="home-search-button">
           <i class="fas fa-search"></i>
         </button>
@@ -114,35 +129,44 @@
     </div>
     
     <div class="carousel-wrapper">
-    <button class="nav prev" id="carousel-prev" aria-label="Anterior">←</button>
-    
-    <section class="carousel" aria-label="Eventos Recentes">
-      <div class="track" data-track>
-        {% for evento in eventos_carousel %}
-          <div class="slide">
-            <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
-              {% if evento.imagem %}
-                <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
-              {% else %}
-                <img src="https://picsum.photos/seed/carousel{{evento.id}}/900/520" alt="Placeholder para {{ evento.nome }}">
-              {% endif %}
-              <div class="body">
-                <div class="date-badge">{{ evento.data|date:"M d" }}</div>
-                <div class="row">
-                    <div class="title">{{ evento.nome }}</div>
-                    <div class="uf">{{ evento.local }}</div>
-                </div>
+        <button class="nav prev" id="carousel-prev" aria-label="Anterior">←</button>
+        
+        <section class="carousel" aria-label="Eventos Recentes">
+          <div class="track" data-track>
+            
+            {% for evento in eventos_carousel %}
+              <div class="slide">
+                <a class="event-card" href="{% url 'detalhe_evento' evento.id %}" style="text-decoration: none; color: inherit;">
+                  
+                  {% if evento.imagem %}
+                    <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
+                  {% else %}
+                    <img src="https://picsum.photos/seed/carousel{{evento.id}}/900/520" alt="Placeholder para {{ evento.nome }}">
+                  {% endif %}
+                  
+                  <div class="body">
+                    
+                    {% if evento.categoria %}
+                        <div class="category-badge">{{ evento.categoria.nome }}</div>
+                    {% endif %}
+                    <div class="date-badge">{{ evento.data|date:"M d" }}</div>
+                    
+                    <div class="row">
+                        <div class="title">{{ evento.nome }}</div>
+                        <div class="uf">{{ evento.local }}</div>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </a>
+            {% empty %}
+              <p style="text-align: center; width: 100%; padding: 2rem;">Nenhum evento recente para mostrar.</p>
+            {% endfor %}
+
           </div>
-        {% empty %}
-          <p style="text-align: center; width: 100%; padding: 2rem;">Nenhum evento recente para mostrar.</p>
-        {% endfor %}
-      </div>
-    </section>
-    
-    <button class="nav next" id="carousel-next" aria-label="Próximo">→</button>
-</div>
+        </section>
+        
+        <button class="nav next" id="carousel-next" aria-label="Próximo">→</button>
+    </div>
   </main>
 
   <script>
@@ -153,15 +177,15 @@
     if (track && nextButton && prevButton && track.children.length > 0) {
         
         nextButton.addEventListener('click', () => {
-            const scrollAmount = track.clientWidth;
+            const scrollAmount = track.clientWidth / 3; // 
             track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         });
 
         prevButton.addEventListener('click', () => {
-            const scrollAmount = track.clientWidth;
+            const scrollAmount = track.clientWidth / 3;
             track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
         });
     }
-</script>
+  </script>
 </body>
 </html>

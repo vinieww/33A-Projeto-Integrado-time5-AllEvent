@@ -9,8 +9,23 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    /* Adicionei o estilo da etiqueta aqui para garantir que apareça azul */
+    .category-badge {
+        display: inline-block;
+        background-color: #007bff; /* Azul */
+        color: white;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+</style>
+
 <div class="container" style="padding: 2rem 1rem;">
->
+
     {% if termo_busca %}
         <h1>Resultados da busca por: "{{ termo_busca }}"</h1>
         <p><a href="{% url 'lista_eventos' %}">Ver todos os eventos</a></p>
@@ -28,8 +43,17 @@
           
             {% for evento in eventos %}
                 <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
-                    <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
+                    {% if evento.imagem %}
+                        <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x200" alt="Sem imagem">
+                    {% endif %}
+
                     <div class="body">
+                        
+                        {% if evento.categoria %}
+                            <div class="category-badge">{{ evento.categoria.nome }}</div>
+                        {% endif %}
                         <div class="date-badge">{{ evento.data|date:"M d" }}</div>
                         <div class="row">
                             <div class="title">{{ evento.nome }}</div>
@@ -39,7 +63,7 @@
                     </div>
                 </a>
             {% empty %}
-                <div style="grid-column: 1 / -1; text-align: center;">
+                <div style="grid-column: 1 / -1; text-align: center; margin-top: 2rem;">
                     <p>Nenhum evento encontrado.</p>
                     {% if termo_busca %}
                         <p>Tente refazer sua busca com outros termos.</p>
