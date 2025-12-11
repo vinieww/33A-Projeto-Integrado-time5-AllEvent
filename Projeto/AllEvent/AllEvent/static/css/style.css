@@ -75,7 +75,8 @@ body {
 }
 
 img {
-    max-width: 100%;
+    max-width: 100%; 
+    height: auto;    
     display: block;
 }
 
@@ -1501,4 +1502,45 @@ auth-card input[type="text"],
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+@media (max-width: 768px) {
+
+    .site-header .compact {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .site-header .nav {
+        flex-direction: column; 
+        gap: 10px;
+    }
+    
+    .row, 
+    .event-grid, 
+    .search-grid {
+        display: flex;
+        flex-direction: column; 
+        width: 100%;
+    }
+    
+    .event-grid {
+        display: grid;
+        grid-template-columns: 1fr; 
+    }
+
+    
+    :root {
+        --fs-xxl: 1.8rem; 
+        --spacing-xxl: 16px; 
+    }
+
+    .container {
+        padding: 0 16px; 
+    }
+    
+    .carousel img {
+        height: 250px; 
+    }
 }
