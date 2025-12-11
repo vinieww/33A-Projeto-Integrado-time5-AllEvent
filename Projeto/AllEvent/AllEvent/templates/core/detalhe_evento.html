@@ -6,48 +6,125 @@
 
 <div class="event-detail-page">
 
+    <!-- BANNER FINO E OTIMIZADO -->
     <header class="event-banner">
-        <div class="event-banner__name">
+        <div class="event-banner__main-info">
             <h1>{{ evento.nome }}</h1>
+            <div class="event-banner__meta">
+                <p class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i> {{ evento.local }}
+                </p>
+                <p class="meta-item">
+                    <i class="far fa-calendar-alt"></i> {{ evento.data|date:"d/m/Y, H:i" }}
+                </p>
+            </div>
         </div>
-        <div class="banner-separator"></div>
-        <div class="event-banner__details">
-            <p><strong>Local:</strong> {{ evento.local }}</p>
-            <p><strong>Quando:</strong> {{ evento.data|date:"d/m/Y, H:i" }}</p>
-        </div>
+
         <div class="event-banner__rating">
-            <p>★★★★☆</p>
+            <form action="{% url 'avaliar_evento' evento.id %}" method="POST" class="rating-system">
+                {% csrf_token %}
+                <div class="stars-wrapper">
+                    <input type="radio" name="nota" id="star5" value="5" {% if minha_avaliacao == 5 %}checked{% endif %} onchange="this.form.submit()">
+                    <label for="star5" title="5 estrelas">★</label>
+                    
+                    <input type="radio" name="nota" id="star4" value="4" {% if minha_avaliacao == 4 %}checked{% endif %} onchange="this.form.submit()">
+                    <label for="star4" title="4 estrelas">★</label>
+                    
+                    <input type="radio" name="nota" id="star3" value="3" {% if minha_avaliacao == 3 %}checked{% endif %} onchange="this.form.submit()">
+                    <label for="star3" title="3 estrelas">★</label>
+                    
+                    <input type="radio" name="nota" id="star2" value="2" {% if minha_avaliacao == 2 %}checked{% endif %} onchange="this.form.submit()">
+                    <label for="star2" title="2 estrelas">★</label>
+                    
+                    <input type="radio" name="nota" id="star1" value="1" {% if minha_avaliacao == 1 %}checked{% endif %} onchange="this.form.submit()">
+                    <label for="star1" title="1 estrela">★</label>
+                </div>
+            </form>
         </div>
     </header>
 
     <main class="event-content">
         
+        <!-- CONTEÚDO PRINCIPAL (IMAGEM E TEXTO) -->
         <div class="event-content__main">
-            <h2><i class="fas fa-info-circle"></i> Sobre o Evento</h2>
+            <h2>
+                <i class="fas fa-info-circle"></i> Sobre o Evento
+                {% if evento.categoria %}
+                    <span class="category-tag">{{ evento.categoria.nome }}</span>
+                {% endif %}
+            </h2>
 
             <div class="main-content-wrapper">
-                
                 <div class="scrollable-content">
                     {% if evento.imagem %}
-                        <img src="{{ evento.imagem.url }}" alt="..." class="event-image">
+                        <img src="{{ evento.imagem.url }}" alt="{{ evento.nome }}" class="event-image">
                     {% endif %}
 
-                    {% if evento.descricao %}>
-                        <p>{{ evento.descricao|linebreaks }}</p>
+                    {% if evento.descricao %}
+                        <div class="event-description">
+                            {{ evento.descricao|linebreaks }}
+                        </div>
                     {% endif %}
                 </div>
-                
             </div>
         </div>
 
+        <!-- BARRA LATERAL (COMENTÁRIOS) -->
         <aside class="event-content__sidebar">
             <h2>Comentários</h2>
-            <div class="comments-placeholder">
-                <p>A seção de comentários estará disponível em breve!</p>
+            
+            <div class="sidebar-wrapper">
+                
+                <!-- Lista de Comentários -->
+                <div class="comments-list scrollable-content" style="max-height: 400px; padding-right: 10px;">
+                    {% if comentarios %}
+                        {% for comentario in comentarios %}
+                            <div class="comment-item">
+                                <div class="comment-header">
+                                    <div class="header-left">
+                                        <strong>{{ comentario.usuario.first_name|default:comentario.usuario.username }}</strong>
+                                        <span>{{ comentario.data_criacao|date:"d/m - H:i" }}</span>
+                                    </div>
+
+                                    <!-- Botão de Deletar (Dono ou Admin) -->
+                                    {% if user == comentario.usuario or user.is_staff %}
+                                        <form action="{% url 'deletar_comentario' comentario.id %}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este comentário?');">
+                                            {% csrf_token %}
+                                            <button type="submit" class="delete-comment-btn" title="Excluir comentário">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                                <p>{{ comentario.texto|linebreaksbr }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-comments">Nenhum comentário ainda. Seja o primeiro!</p>
+                    {% endif %}
+                </div>
+
+                <!-- Formulário de Comentário -->
+                <div class="comment-form-area">
+                    {% if user.is_authenticated %}
+                        <form action="{% url 'adicionar_comentario' evento.id %}" method="POST">
+                            {% csrf_token %}
+                            <textarea name="comentario_texto" rows="3" placeholder="Escreva seu comentário..." required></textarea>
+                            <button type="submit" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 8px;">Enviar</button>
+                        </form>
+                    {% else %}
+                        <div class="login-to-comment">
+                            <p>Você precisa <a href="{% url 'login' %}?next={{ request.path }}">entrar</a> para comentar.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
             </div>
         </aside>
 
     </main>
+
+    <!-- RODAPÉ DA PÁGINA (BOTOES VOLTAR E FAVORITAR) -->
     <footer class="event-actions">
         
         <a href="{% url 'lista_eventos' %}"

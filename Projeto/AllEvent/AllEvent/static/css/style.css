@@ -739,37 +739,77 @@ a.event-card:hover {
     margin: var(--spacing-xxl) auto;
     background-color: var(--card-background);
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius-md);
+    
+    border-radius: var(--border-radius-md); /* Mantém o arredondamento */
+    overflow: visible; /* <--- MUDE ISSO DE 'hidden' PARA 'visible' */
+    
     box-shadow: var(--shadow-sm);
-
-    overflow: hidden; 
     display: flex;
     flex-direction: column;
 }
 
 .event-banner {
+    background: linear-gradient(120deg, #F59E0B, #c2410c);
+    
+    /* Define uma altura mínima para garantir que o texto caiba */
+    min-height: 140px; 
+    padding: 0 var(--spacing-xxl); /* Remove padding vertical excessivo */
+    
     display: flex;
-    flex-wrap: wrap; 
     justify-content: space-between;
-    align-items: flex-end; 
-    gap: var(--spacing-lg);
-    background: linear-gradient(135deg, #e4950d, #b4460b);
-    color: var(--text-color-light);
-    padding: var(--spacing-xl) var(--spacing-xxl);
+    border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
+    /* A MUDANÇA CHAVE: Centraliza o conteúdo verticalmente */
+    align-items: center; 
+    
+    color: white;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+    position: relative;
+    
+    /* Permite que, se uma letra for muito alta, ela não seja cortada */
+    overflow: visible; 
 }
 
-.event-banner__name { 
-    flex-grow: 1; 
+.event-banner__main-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--spacing-lg) 0; /* Um pouco de respiro em cima e embaixo */
 }
 
-.event-banner__name h1 {
+.event-banner h1 {
     font-family: var(--font-serif);
-    font-size: var(--fs-xxl);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
-    padding-bottom: var(--spacing-sm);
-    display: inline-block; 
+    
+    /* Reduzi levemente (de 3rem para 2.6rem) para caber melhor no banner fino */
+    font-size: 2.6rem; 
+    font-weight: 700;
+    
+    line-height: 1.2; /* Altura de linha justa */
+    margin: 0 0 8px 0; /* Remove margens estranhas e dá espaço pro data/local */
+    padding: 0;
+    
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: none;
+}
+
+.event-banner__meta {
+    display: flex;
+    gap: var(--spacing-xl);
+    font-size: var(--fs-md); /* Fonte um pouco menor para ficar harmônico */
+    opacity: 0.95;
+    margin: 0; /* Zera margens para ficar compacto */
+}
+
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço ícone-texto */
+    font-weight: 500;
     margin: 0;
-    line-height: 1.2;
+}
+
+.meta-item i {
+    opacity: 0.8;
 }
 
 .banner-separator {
@@ -815,30 +855,46 @@ a.event-card:hover {
  }
 
 
+/* --- Ajuste de Imagem e Texto (Design Blog) --- */
+
 .event-image {
-  
-    float: right; 
-    width: 65%;            
-    max-width: 550px;       
-    height: auto;         
-    
-    margin-left: 24px;      
-    margin-bottom: 12px;    
-    
+    width: 100%;
+    height: auto; /* Altura automática para manter proporção */
+    max-height: 350px; /* Limite para não ocupar o scroll todo só com foto */
     object-fit: cover;
-    border-radius: var(--border-radius-sm);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    object-position: top;
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Sombra mais leve dentro do container */
 }
 
-.event-image:hover {
-    transform: scale(1.02);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+
+/* Melhoria na tipografia do texto */
+.event-description {
+    font-size: var(--fs-md);
+    line-height: 1.8; /* Aumenta o espaço entre linhas para facilitar leitura */
+    color: var(--text-color-dark);
+    text-align: left; /* Garante alinhamento à esquerda, evita buracos */
 }
+
+.event-description {
+    font-size: var(--fs-md);
+    line-height: 1.8;
+    color: #374151; /* Cinza escuro para leitura confortável (menos preto puro) */
+    text-align: left;
+}
+.event-image:hover {
+    transform: scale(1.01);
+}
+.category-tag {
+    transform: translateY(-3px);
+    box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
+}
+
+
 
 .scrollable-content p {
-    text-align: justify;
+    text-align: left;
     margin-bottom: 1em;
 }
 
@@ -851,13 +907,9 @@ a.event-card:hover {
 }
 
 .event-content__main h2 {
-    font-size: var(--fs-xl);
-    margin-bottom: var(--spacing-lg);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color); /* Linha mais suave */
     padding-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .event-content__main h2 .fas {
@@ -897,12 +949,13 @@ a.event-card:hover {
 .event-actions {
     padding: var(--spacing-lg) var(--spacing-xxl);
     margin-top: auto;
-    
     display: flex;
-    justify-content: space-between; 
-    
+    justify-content: space-between;
     border-top: 1px solid var(--border-color);
     background-color: var(--card-background);
+    
+    /* ADICIONE ESTA LINHA: Arredonda apenas os cantos de baixo */
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
 }
 
 .favorite-button {
@@ -915,29 +968,39 @@ a.event-card:hover {
     }
 
 .scrollable-content {
-    max-height: 400px; 
+    /* Define a altura fixa para ativar o scroll */
+    max-height: 500px; /* Um pouco mais alto para ver mais da imagem */
+    overflow-y: auto;  /* Ativa a rolagem vertical */
     
-    overflow-y: auto; 
-    padding-right: 12px;
-    margin-bottom: 0; 
+    /* Espaçamento interno para o texto não colar na borda/barra */
+    padding-right: 20px; 
+    
+    /* Um fundo sutil ou borda para delimitar a área de leitura (opcional, mas fica elegante) */
+    background-color: #ffffff;
+    /* Comportamento de rolagem suave */
+    scroll-behavior: smooth;
 }
+
 
 .scrollable-content::-webkit-scrollbar {
-     width: 8px; 
+    width: 8px; /* Mais fina que o padrão */
 }
 
-.scrollable-content::-webkit-scrollbar-track { 
-    background: #f1f1f1; border-radius: 10px; 
+.scrollable-content::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 4px;
 }
 
 .scrollable-content::-webkit-scrollbar-thumb {
-     background: #ccc; border-radius: 10px; 
-}
-    
-.scrollable-content::-webkit-scrollbar-thumb:hover { 
-    background: #aaa; 
+    background: #cbd5e1; /* Cinza suave moderno */
+    border-radius: 4px; /* Bordas redondas */
+    border: 2px solid #f1f1f1; /* Cria um efeito de respiro ao redor da alça */
 }
 
+/* Quando passa o mouse na barra */
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color); /* Fica azul (sua cor primária) ao interagir */
+}
 
 .event-content__main {
     flex: 2; 
@@ -1005,4 +1068,466 @@ a.event-card:hover {
 
 .messages-container .alert:not(:first-child) {
     display: none;
+}
+
+/* --- Sistema de Avaliação (Rating - Versão Grande) --- */
+
+.event-banner__rating {
+    /* Centraliza verticalmente no espaço direito do banner */
+    align-self: center; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: var(--spacing-lg); /* Garante separação do texto */
+}
+
+.rating-system {
+    display: inline-block;
+    position: relative;
+}
+
+/* Container das estrelas */
+.stars-wrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    
+    /* AQUI ESTÁ O AUMENTO: De 24px para aprox 56px */
+    font-size: 3.5rem; 
+    
+    gap: 4px; /* Um pouco mais de espaço entre as estrelas gigantes */
+    line-height: 1;
+}
+
+/* Esconde OBRIGATORIAMENTE as bolinhas */
+.stars-wrapper input {
+    display: none !important;
+    visibility: hidden;
+    position: absolute;
+}
+
+/* Estilo das estrelas */
+.stars-wrapper label {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4); /* Levemente mais visível */
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 0 2px;
+}
+
+/* Efeito ao passar o mouse: a estrela cresce um pouquinho */
+.stars-wrapper label:hover {
+    transform: scale(1.1); 
+}
+
+/* Cores ativas */
+.stars-wrapper label:hover,
+.stars-wrapper label:hover ~ label,
+.stars-wrapper input:checked ~ label {
+    color: #FFC700;
+    /* Sombra mais forte para acompanhar o tamanho maior */
+    text-shadow: 0 2px 15px rgba(255, 199, 0, 0.5); 
+}
+
+.stars-wrapper label:hover,
+.stars-wrapper label:hover ~ label {
+    color: #ffd633;
+}
+.category-tag {
+    background-color: var(--primary-color); /* Aquele azul padrão (#0d6efd) */
+    color: white;
+    font-size: 0.5em; /* Metade do tamanho do título H2 */
+    padding: 4px 10px;
+    border-radius: 4px; /* Cantos levemente arredondados */
+    text-transform: uppercase; /* Força ficar tudo maiúsculo (ex: ROCK) */
+    vertical-align: middle; /* Alinha com o texto "Sobre o Evento" */
+    margin-left: 12px; /* Espaço entre o título e a tag */
+    font-weight: 700; /* Negrito */
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+/* --- Estilos da Barra Lateral de Comentários --- */
+
+.sidebar-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Garante que o sidebar ocupe altura mas mantenha o form no final se quiser, 
+       mas aqui vamos deixar fluir */
+    gap: var(--spacing-lg);
+}
+
+/* Item individual de comentário */
+.comment-item {
+    background-color: #f8f9fa; /* Cinza bem clarinho */
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--spacing-md);
+    font-size: var(--fs-sm);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 0.85em;
+    color: var(--secondary-color);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 4px;
+}
+
+.comment-header strong {
+    color: var(--primary-color); /* Nome em azul */
+}
+
+.comment-item p {
+    margin: 0;
+    color: var(--text-color-dark);
+    line-height: 1.4;
+}
+
+.no-comments {
+    text-align: center;
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* Área do Formulário */
+.comment-form-area {
+    margin-top: var(--spacing-md);
+    border-top: 2px solid var(--border-color);
+    padding-top: var(--spacing-lg);
+}
+
+.comment-form-area textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    resize: none; /* Impede o usuário de quebrar o layout puxando a caixa */
+    font-family: var(--font-sans);
+    font-size: var(--fs-sm);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.comment-form-area textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.1);
+}
+
+.login-to-comment {
+    text-align: center;
+    background: #fff3cd; /* Amarelo clarinho de aviso */
+    color: #856404;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-sm);
+}
+
+.login-to-comment a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* --- Botão de Excluir Comentário --- */
+
+.comment-header {
+    display: flex;
+    justify-content: space-between; /* Separa o nome/data do botão de lixo */
+    align-items: center;
+    /* ... (mantenha o resto que já existia) ... */
+}
+
+.header-left {
+    display: flex;
+    gap: 8px; /* Espaço entre nome e data */
+    align-items: baseline;
+}
+
+.delete-comment-btn {
+    background: none;
+    border: none;
+    color: #adb5bd; /* Cinza claro discreto */
+    cursor: pointer;
+    padding: 0 4px;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.delete-comment-btn:hover {
+    color: var(--btn-red); /* Fica vermelho ao passar o mouse */
+}
+
+/* --- Página de Preferências --- */
+
+.pref-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.pref-section h3 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--primary-color);
+}
+
+.help-text {
+    font-size: var(--fs-sm);
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-xl) 0;
+}
+
+/* Toggle Switch (Interruptor) */
+.toggle-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: var(--primary-color);
+}
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+/* Grid de Interesses (Checkboxes bonitos) */
+.interests-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.interest-checkbox input {
+    display: none; /* Esconde o checkbox padrão feio */
+}
+
+.interest-box {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f1f3f5;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-pill);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-size: var(--fs-sm);
+}
+
+.interest-checkbox input:checked + .interest-box {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
+}
+
+.interest-checkbox:hover .interest-box {
+    background-color: #e9ecef;
+}
+.interest-checkbox input:checked:hover .interest-box {
+    background-color: var(--accent-color-hover);
+}
+
+/* --- OVERHAUL DA PÁGINA DE LISTA/BUSCA --- */
+
+/* Cabeçalho Centralizado */
+.catalog-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.catalog-header .subtitle {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.catalog-header h1 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-color-dark);
+}
+
+.clear-search {
+    color: var(--btn-red);
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+.clear-search:hover { opacity: 0.8; text-decoration: underline; }
+
+/* Barra de Ferramentas (Toolbar) */
+.catalog-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-md) 0;
+    margin-top: var(--spacing-lg);
+}
+
+.result-count {
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+}
+
+.btn-outline.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    border-width: 1px;
+}
+
+/* Card Improvements */
+.card-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-date {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 6px 12px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    font-family: var(--font-sans);
+    line-height: 1;
+}
+
+.floating-date .day {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-color-dark);
+}
+.floating-date .month {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.category-tag-small {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.meta-row {
+    margin-top: auto; /* Empurra para o fundo se o card crescer */
+    padding-top: 10px;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+/* Estado Vazio (Empty State) */
+.empty-state {
+    grid-column: 1 / -1; /* Ocupa toda a largura do grid */
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #fff;
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius-lg);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    opacity: 0.5;
+    margin-bottom: var(--spacing-lg);
+}
+
+.empty-state h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-color-dark);
+}
+
+.empty-state p {
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-xl);
+}
+
+auth-card input[type="text"],
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--fs-md);
+    font-family: var(--font-sans);
+}
+
+.auth-card input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
 }

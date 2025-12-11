@@ -1,21 +1,63 @@
-
 {% extends "base.html" %}
 
 {% block title %}Buscar Evento{% endblock %}
 
 {% block content %}
-<div class="container" style="padding: 2rem 1rem;">
+<div class="container" style="padding: 3rem 1rem;">
 
-    <h1>Buscar um Evento</h1>
-    <p>Digite o nome do evento que você está procurando.</p>
-
-    <form action="{% url 'resultado_busca' %}" method="GET" style="margin-top: 1.5rem;">
+    <div class="simple-card" style="max-width: 800px; margin: 0 auto; text-align: left;">
+        <h1 style="text-align: center; margin-bottom: 2rem;">Encontre seu próximo evento</h1>
         
-        <input type="text" name="termo_busca" placeholder="Ex: Show de Rock" style="padding: 10px; width: 300px; font-size: 1rem;">
-        
-        <button type="submit" class="btn btn-primary" style="padding: 10px 20px;">Buscar</button>
+        <form action="{% url 'resultado_busca' %}" method="GET">
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                
+                <div class="form-group" style="grid-column: span 2;">
+                    <label for="id_termo">Nome do Evento</label>
+                    <input type="text" name="termo_busca" id="id_termo" placeholder="Ex: Show do Alok, Festival de Jazz...">
+                </div>
 
-    </form>
+                <div class="form-group">
+                    <label for="id_local">Local</label>
+                    <input type="text" name="local" id="id_local" placeholder="Cidade ou local (Ex: MG)">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_data">Data Específica</label>
+                    <input type="date" name="data" id="id_data">
+                </div>
+
+                <div class="form-group">
+                    <label for="id_categoria">Categoria</label>
+                    <select name="categoria" id="id_categoria" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+                        <option value="">Todas as categorias</option>
+                        {% for cat in categorias %}
+                            <option value="{{ cat.id }}">{{ cat.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_avaliacao">Avaliação Mínima</label>
+                    <select name="avaliacao" id="id_avaliacao" style="width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--border-radius-sm);">
+                        <option value="">Qualquer nota</option>
+                        <option value="5">★★★★★ (5 Estrelas)</option>
+                        <option value="4">★★★★☆ (4+ Estrelas)</option>
+                        <option value="3">★★★☆☆ (3+ Estrelas)</option>
+                        <option value="2">★★☆☆☆ (2+ Estrelas)</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                    <i class="fas fa-search"></i> Buscar Eventos
+                </button>
+            </div>
+
+        </form>
+    </div>
     
 </div>
 {% endblock %}

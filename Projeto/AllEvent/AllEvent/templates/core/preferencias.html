@@ -7,27 +7,21 @@
     <title>Preferências - Perfil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
-<style>
+    <style>
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;          
             width: 100%;                 
         }
-
-        .logo a {
-            text-decoration: none; 
-            color: inherit;       
-        }
+        .logo a { text-decoration: none; color: inherit; }
     </style>
 </head>
 <body>
 
     <header class="site-header compact">
         <div class="container header-container">
-            <h1 class="logo">
-                <a href="{% url 'home' %}">AllEvent</a>
-            </h1>
+            <h1 class="logo"><a href="{% url 'home' %}">AllEvent</a></h1>
             <a href="{% url 'perfil' %}" class="user-info">
                 <i class="fas fa-user-circle user-icon"></i>
             </a>
@@ -38,7 +32,7 @@
         <aside class="profile-nav">
             <div class="nav-links">
                <a href="{% url 'editar_dados' %}" class="nav-link">Editar Dados</a>
-                <a href="{% url 'preferencias' %}" class="nav-link">Preferências</a>
+                <a href="{% url 'preferencias' %}" class="nav-link active">Preferências</a>
                 <a href="{% url 'favoritos' %}" class="nav-link">Favoritos</a>
             </div>
             <form action="{% url 'logout' %}" method="POST" style="display: inline;">
@@ -48,14 +42,40 @@
         </aside>
 
         <section class="profile-content">
-            <h2>Preferências</h2>
-            <p>Nesta seção, você pode configurar suas preferências de notificação, temas do site e outras configurações personalizadas.</p>
-            <p>Por exemplo, você pode escolher receber e-mails sobre:</p>
-            <ul>
-                <li>Eventos de Música</li>
-                <li>Eventos de Tecnologia</li>
-                <li>Eventos de Esportes</li>
-            </ul>
+            <h2>Preferências da Conta</h2>
+            
+            {% if messages %}
+                <div class="messages-container">
+                    {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" style="background-color: var(--primary-color); padding: 10px; border-radius: 5px; color: white; margin-bottom: 20px;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form action="{% url 'preferencias' %}" method="POST" class="preferences-form">
+                {% csrf_token %}
+                <div class="pref-section">
+                    <h3><i class="fas fa-heart"></i> O que você curte?</h3>
+                    <p class="help-text">Selecione as categorias que você mais gosta para receber recomendações.</p>
+                    
+                    <div class="interests-grid">
+                        {% for cat in categorias %}
+                            <label class="interest-checkbox">
+                                <input type="checkbox" name="interesses" value="{{ cat.id }}" 
+                                    {% if cat in pref.interesses.all %}checked{% endif %}>
+                                <span class="interest-box">{{ cat.nome }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-actions" style="margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary">Salvar Preferências</button>
+                </div>
+
+            </form>
         </section>
     </main>
 

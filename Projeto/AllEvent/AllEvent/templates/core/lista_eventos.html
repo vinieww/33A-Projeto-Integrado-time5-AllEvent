@@ -1,73 +1,75 @@
 {% extends "base.html" %}
 
-{% block title %}
-    {% if termo_busca %}
-        Resultados para "{{ termo_busca }}"
-    {% else %}
-        Todos os Eventos
-    {% endif %}
-{% endblock %}
+{% block title %}Todos os Eventos{% endblock %}
 
 {% block content %}
-<style>
-    /* Adicionei o estilo da etiqueta aqui para garantir que apareça azul */
-    .category-badge {
-        display: inline-block;
-        background-color: #007bff; /* Azul */
-        color: white;
-        font-size: 0.75rem;
-        padding: 4px 10px;
-        border-radius: 4px;
-        text-transform: uppercase;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-</style>
 
-<div class="container" style="padding: 2rem 1rem;">
+<div class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
 
-    {% if termo_busca %}
-        <h1>Resultados da busca por: "{{ termo_busca }}"</h1>
-        <p><a href="{% url 'lista_eventos' %}">Ver todos os eventos</a></p>
-    {% else %}
-        <h1>Todos os Eventos</h1>
-        <p>Explore o catálogo completo de eventos disponíveis.</p>
-    {% endif %}
+    <!-- CABEÇALHO DA PÁGINA -->
+    <header class="catalog-header">
+        <div class="header-content">
+            <span class="subtitle">Agenda Completa</span>
+            <h1>Próximos Eventos</h1>
+            <p style="color: var(--secondary-color); max-width: 600px; margin: 0 auto;">
+                Confira nossa seleção exclusiva de shows, festivais e experiências imperdíveis.
+            </p>
+        </div>
 
-    <a href="{% url 'buscar_eventos' %}" class="btn btn-secondary" style="margin-top: 1rem; margin-bottom: 2rem; display: inline-block;">
-        🔍 Fazer uma busca específica
-    </a>
+        <!-- BARRA DE FERRAMENTAS -->
+        <div class="catalog-toolbar">
+            <span class="result-count">
+                <strong>{{ eventos|length }}</strong> eventos disponíveis
+            </span>
+
+            <a href="{% url 'buscar_eventos' %}" class="btn btn-outline btn-sm">
+                <i class="fas fa-sliders-h"></i> Filtrar Eventos
+            </a>
+        </div>
+    </header>
     
-    <section class="events">
+    <!-- GRID DE EVENTOS -->
+    <section class="events-catalog">
         <div class="event-grid">
           
             {% for evento in eventos %}
                 <a class="event-card" href="{% url 'detalhe_evento' evento.id %}">
-                    {% if evento.imagem %}
-                        <img src="{{ evento.imagem.url }}" alt="Imagem do evento {{ evento.nome }}">
-                    {% else %}
-                        <img src="https://via.placeholder.com/300x200" alt="Sem imagem">
-                    {% endif %}
+                    
+                    <div class="card-image-wrapper">
+                        {% if evento.imagem %}
+                            <img src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
+                        {% else %}
+                            <!-- Gera uma imagem aleatória consistente baseada no ID -->
+                            <img src="https://picsum.photos/seed/{{evento.id}}/400/250" alt="Imagem ilustrativa">
+                        {% endif %}
+                        
+                        <!-- Data flutuante (Quadrado Branco) -->
+                        <div class="floating-date">
+                            <span class="day">{{ evento.data|date:"d" }}</span>
+                            <span class="month">{{ evento.data|date:"M" }}</span>
+                        </div>
+                    </div>
 
                     <div class="body">
-                        
+                        <!-- Categoria (Tag Azul) -->
                         {% if evento.categoria %}
-                            <div class="category-badge">{{ evento.categoria.nome }}</div>
+                            <span class="category-tag-small">{{ evento.categoria.nome }}</span>
                         {% endif %}
-                        <div class="date-badge">{{ evento.data|date:"M d" }}</div>
-                        <div class="row">
-                            <div class="title">{{ evento.nome }}</div>
-                            <div class="uf">{{ evento.local }}</div>
+                        
+                        <div class="title">{{ evento.nome }}</div>
+                        
+                        <div class="meta-row">
+                            <span class="local"><i class="fas fa-map-marker-alt"></i> {{ evento.local }}</span>
                         </div>
-                        <p class="desc">{{ evento.descricao|truncatewords:10 }}</p>
                     </div>
                 </a>
             {% empty %}
-                <div style="grid-column: 1 / -1; text-align: center; margin-top: 2rem;">
-                    <p>Nenhum evento encontrado.</p>
-                    {% if termo_busca %}
-                        <p>Tente refazer sua busca com outros termos.</p>
-                    {% endif %}
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="far fa-calendar-times"></i>
+                    </div>
+                    <h3>Nenhum evento agendado no momento.</h3>
+                    <p>Fique ligado, em breve teremos novidades!</p>
                 </div>
             {% endfor %}
     
