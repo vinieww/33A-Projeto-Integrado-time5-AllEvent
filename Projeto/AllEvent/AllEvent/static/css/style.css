@@ -740,8 +740,8 @@ a.event-card:hover {
     background-color: var(--card-background);
     border: 1px solid var(--border-color);
     
-    border-radius: var(--border-radius-md); /* Mantém o arredondamento */
-    overflow: visible; /* <--- MUDE ISSO DE 'hidden' PARA 'visible' */
+    border-radius: var(--border-radius-md); 
+    overflow: visible; 
     
     box-shadow: var(--shadow-sm);
     display: flex;
@@ -751,21 +751,20 @@ a.event-card:hover {
 .event-banner {
     background: linear-gradient(120deg, #F59E0B, #c2410c);
     
-    /* Define uma altura mínima para garantir que o texto caiba */
+
     min-height: 140px; 
-    padding: 0 var(--spacing-xxl); /* Remove padding vertical excessivo */
+    padding: 0 var(--spacing-xxl);
     
     display: flex;
     justify-content: space-between;
     border-radius: var(--border-radius-md) var(--border-radius-md) 0 0;
-    /* A MUDANÇA CHAVE: Centraliza o conteúdo verticalmente */
+
     align-items: center; 
     
     color: white;
     box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
     position: relative;
     
-    /* Permite que, se uma letra for muito alta, ela não seja cortada */
     overflow: visible; 
 }
 
@@ -773,18 +772,18 @@ a.event-card:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: var(--spacing-lg) 0; /* Um pouco de respiro em cima e embaixo */
+    padding: var(--spacing-lg) 0; 
 }
 
 .event-banner h1 {
     font-family: var(--font-serif);
     
-    /* Reduzi levemente (de 3rem para 2.6rem) para caber melhor no banner fino */
+
     font-size: 2.6rem; 
     font-weight: 700;
     
-    line-height: 1.2; /* Altura de linha justa */
-    margin: 0 0 8px 0; /* Remove margens estranhas e dá espaço pro data/local */
+    line-height: 1.2; 
+    margin: 0 0 8px 0; 
     padding: 0;
     
     text-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -794,16 +793,16 @@ a.event-card:hover {
 .event-banner__meta {
     display: flex;
     gap: var(--spacing-xl);
-    font-size: var(--fs-md); /* Fonte um pouco menor para ficar harmônico */
+    font-size: var(--fs-md); 
     opacity: 0.95;
-    margin: 0; /* Zera margens para ficar compacto */
+    margin: 0; 
 }
 
 
 .meta-item {
     display: flex;
     align-items: center;
-    gap: 8px; /* Espaço ícone-texto */
+    gap: 8px; 
     font-weight: 500;
     margin: 0;
 }
@@ -855,32 +854,31 @@ a.event-card:hover {
  }
 
 
-/* --- Ajuste de Imagem e Texto (Design Blog) --- */
 
 .event-image {
     width: 100%;
-    height: auto; /* Altura automática para manter proporção */
-    max-height: 350px; /* Limite para não ocupar o scroll todo só com foto */
+    height: auto; 
+    max-height: 350px; 
     object-fit: cover;
     object-position: top;
     border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Sombra mais leve dentro do container */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 
-/* Melhoria na tipografia do texto */
+
 .event-description {
     font-size: var(--fs-md);
-    line-height: 1.8; /* Aumenta o espaço entre linhas para facilitar leitura */
+    line-height: 1.8; 
     color: var(--text-color-dark);
-    text-align: left; /* Garante alinhamento à esquerda, evita buracos */
+    text-align: left; 
 }
 
 .event-description {
     font-size: var(--fs-md);
     line-height: 1.8;
-    color: #374151; /* Cinza escuro para leitura confortável (menos preto puro) */
+    color: #374151;
     text-align: left;
 }
 .event-image:hover {
@@ -907,7 +905,7 @@ a.event-card:hover {
 }
 
 .event-content__main h2 {
-    border-bottom: 1px solid var(--border-color); /* Linha mais suave */
+    border-bottom: 1px solid var(--border-color); 
     padding-bottom: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
 }
@@ -954,7 +952,6 @@ a.event-card:hover {
     border-top: 1px solid var(--border-color);
     background-color: var(--card-background);
     
-    /* ADICIONE ESTA LINHA: Arredonda apenas os cantos de baixo */
     border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
 }
 
@@ -968,22 +965,19 @@ a.event-card:hover {
     }
 
 .scrollable-content {
-    /* Define a altura fixa para ativar o scroll */
-    max-height: 500px; /* Um pouco mais alto para ver mais da imagem */
-    overflow-y: auto;  /* Ativa a rolagem vertical */
+    max-height: 500px;
+    overflow-y: auto;
     
-    /* Espaçamento interno para o texto não colar na borda/barra */
+
     padding-right: 20px; 
     
-    /* Um fundo sutil ou borda para delimitar a área de leitura (opcional, mas fica elegante) */
     background-color: #ffffff;
-    /* Comportamento de rolagem suave */
     scroll-behavior: smooth;
 }
 
 
 .scrollable-content::-webkit-scrollbar {
-    width: 8px; /* Mais fina que o padrão */
+    width: 8px; 
 }
 
 .scrollable-content::-webkit-scrollbar-track {
@@ -992,14 +986,14 @@ a.event-card:hover {
 }
 
 .scrollable-content::-webkit-scrollbar-thumb {
-    background: #cbd5e1; /* Cinza suave moderno */
-    border-radius: 4px; /* Bordas redondas */
-    border: 2px solid #f1f1f1; /* Cria um efeito de respiro ao redor da alça */
+    background: #cbd5e1; 
+    border-radius: 4px;
+    border: 2px solid #f1f1f1; 
 }
 
-/* Quando passa o mouse na barra */
+
 .scrollable-content::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color); /* Fica azul (sua cor primária) ao interagir */
+    background: var(--primary-color); 
 }
 
 .event-content__main {
@@ -1070,16 +1064,14 @@ a.event-card:hover {
     display: none;
 }
 
-/* --- Sistema de Avaliação (Rating - Versão Grande) --- */
 
 .event-banner__rating {
-    /* Centraliza verticalmente no espaço direito do banner */
     align-self: center; 
     
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    margin-left: var(--spacing-lg); /* Garante separação do texto */
+    margin-left: var(--spacing-lg);
 }
 
 .rating-system {
@@ -1087,44 +1079,37 @@ a.event-card:hover {
     position: relative;
 }
 
-/* Container das estrelas */
 .stars-wrapper {
     display: flex;
     flex-direction: row-reverse;
-    
-    /* AQUI ESTÁ O AUMENTO: De 24px para aprox 56px */
     font-size: 3.5rem; 
     
-    gap: 4px; /* Um pouco mais de espaço entre as estrelas gigantes */
+    gap: 4px;
     line-height: 1;
 }
 
-/* Esconde OBRIGATORIAMENTE as bolinhas */
 .stars-wrapper input {
     display: none !important;
     visibility: hidden;
     position: absolute;
 }
 
-/* Estilo das estrelas */
 .stars-wrapper label {
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.4); /* Levemente mais visível */
+    color: rgba(255, 255, 255, 0.4); 
     transition: transform 0.2s ease, color 0.2s ease;
     padding: 0 2px;
 }
 
-/* Efeito ao passar o mouse: a estrela cresce um pouquinho */
+
 .stars-wrapper label:hover {
     transform: scale(1.1); 
 }
 
-/* Cores ativas */
 .stars-wrapper label:hover,
 .stars-wrapper label:hover ~ label,
 .stars-wrapper input:checked ~ label {
     color: #FFC700;
-    /* Sombra mais forte para acompanhar o tamanho maior */
     text-shadow: 0 2px 15px rgba(255, 199, 0, 0.5); 
 }
 
@@ -1133,33 +1118,30 @@ a.event-card:hover {
     color: #ffd633;
 }
 .category-tag {
-    background-color: var(--primary-color); /* Aquele azul padrão (#0d6efd) */
+    background-color: var(--primary-color); 
     color: white;
-    font-size: 0.5em; /* Metade do tamanho do título H2 */
+    font-size: 0.5em; 
     padding: 4px 10px;
-    border-radius: 4px; /* Cantos levemente arredondados */
-    text-transform: uppercase; /* Força ficar tudo maiúsculo (ex: ROCK) */
-    vertical-align: middle; /* Alinha com o texto "Sobre o Evento" */
-    margin-left: 12px; /* Espaço entre o título e a tag */
-    font-weight: 700; /* Negrito */
+    border-radius: 4px; 
+    text-transform: uppercase; 
+    vertical-align: middle;
+    margin-left: 12px; 
+    font-weight: 700;
     letter-spacing: 0.5px;
     display: inline-block;
 }
 
-/* --- Estilos da Barra Lateral de Comentários --- */
 
 .sidebar-wrapper {
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* Garante que o sidebar ocupe altura mas mantenha o form no final se quiser, 
-       mas aqui vamos deixar fluir */
+
     gap: var(--spacing-lg);
 }
 
-/* Item individual de comentário */
 .comment-item {
-    background-color: #f8f9fa; /* Cinza bem clarinho */
+    background-color: #f8f9fa; 
     border: 1px solid var(--border-color);
     padding: var(--spacing-md);
     border-radius: var(--border-radius-md);
@@ -1179,7 +1161,7 @@ a.event-card:hover {
 }
 
 .comment-header strong {
-    color: var(--primary-color); /* Nome em azul */
+    color: var(--primary-color); 
 }
 
 .comment-item p {
@@ -1195,7 +1177,7 @@ a.event-card:hover {
     margin-top: 20px;
 }
 
-/* Área do Formulário */
+
 .comment-form-area {
     margin-top: var(--spacing-md);
     border-top: 2px solid var(--border-color);
@@ -1207,7 +1189,7 @@ a.event-card:hover {
     padding: var(--spacing-md);
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
-    resize: none; /* Impede o usuário de quebrar o layout puxando a caixa */
+    resize: none; 
     font-family: var(--font-sans);
     font-size: var(--fs-sm);
     outline: none;
@@ -1221,7 +1203,7 @@ a.event-card:hover {
 
 .login-to-comment {
     text-align: center;
-    background: #fff3cd; /* Amarelo clarinho de aviso */
+    background: #fff3cd;
     color: #856404;
     padding: var(--spacing-md);
     border-radius: var(--border-radius-sm);
@@ -1233,25 +1215,23 @@ a.event-card:hover {
     text-decoration: underline;
 }
 
-/* --- Botão de Excluir Comentário --- */
 
 .comment-header {
     display: flex;
-    justify-content: space-between; /* Separa o nome/data do botão de lixo */
+    justify-content: space-between; 
     align-items: center;
-    /* ... (mantenha o resto que já existia) ... */
 }
 
 .header-left {
     display: flex;
-    gap: 8px; /* Espaço entre nome e data */
+    gap: 8px; 
     align-items: baseline;
 }
 
 .delete-comment-btn {
     background: none;
     border: none;
-    color: #adb5bd; /* Cinza claro discreto */
+    color: #adb5bd; 
     cursor: pointer;
     padding: 0 4px;
     font-size: 0.9rem;
@@ -1259,10 +1239,9 @@ a.event-card:hover {
 }
 
 .delete-comment-btn:hover {
-    color: var(--btn-red); /* Fica vermelho ao passar o mouse */
+    color: var(--btn-red); 
 }
 
-/* --- Página de Preferências --- */
 
 .pref-section {
     margin-bottom: var(--spacing-xl);
@@ -1289,7 +1268,6 @@ a.event-card:hover {
     margin: var(--spacing-xl) 0;
 }
 
-/* Toggle Switch (Interruptor) */
 .toggle-wrapper {
     display: flex;
     justify-content: space-between;
@@ -1337,7 +1315,6 @@ input:checked + .slider:before {
     transform: translateX(24px);
 }
 
-/* Grid de Interesses (Checkboxes bonitos) */
 .interests-grid {
     display: flex;
     flex-wrap: wrap;
@@ -1345,7 +1322,7 @@ input:checked + .slider:before {
 }
 
 .interest-checkbox input {
-    display: none; /* Esconde o checkbox padrão feio */
+    display: none; 
 }
 
 .interest-box {
@@ -1374,9 +1351,6 @@ input:checked + .slider:before {
     background-color: var(--accent-color-hover);
 }
 
-/* --- OVERHAUL DA PÁGINA DE LISTA/BUSCA --- */
-
-/* Cabeçalho Centralizado */
 .catalog-header {
     text-align: center;
     margin-bottom: var(--spacing-xxl);
@@ -1411,7 +1385,6 @@ input:checked + .slider:before {
 }
 .clear-search:hover { opacity: 0.8; text-decoration: underline; }
 
-/* Barra de Ferramentas (Toolbar) */
 .catalog-toolbar {
     display: flex;
     justify-content: space-between;
@@ -1433,7 +1406,6 @@ input:checked + .slider:before {
     border-width: 1px;
 }
 
-/* Card Improvements */
 .card-image-wrapper {
     position: relative;
     overflow: hidden;
@@ -1480,15 +1452,14 @@ input:checked + .slider:before {
 }
 
 .meta-row {
-    margin-top: auto; /* Empurra para o fundo se o card crescer */
+    margin-top: auto; 
     padding-top: 10px;
     color: var(--secondary-color);
     font-size: 0.9rem;
 }
 
-/* Estado Vazio (Empty State) */
 .empty-state {
-    grid-column: 1 / -1; /* Ocupa toda a largura do grid */
+    grid-column: 1 / -1; 
     text-align: center;
     padding: 4rem 2rem;
     background: #fff;

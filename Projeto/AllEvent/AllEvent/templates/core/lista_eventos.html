@@ -6,7 +6,6 @@
 
 <div class="container" style="padding-top: 3rem; padding-bottom: 4rem;">
 
-    <!-- CABEÇALHO DA PÁGINA -->
     <header class="catalog-header">
         <div class="header-content">
             <span class="subtitle">Agenda Completa</span>
@@ -16,7 +15,7 @@
             </p>
         </div>
 
-        <!-- BARRA DE FERRAMENTAS -->
+
         <div class="catalog-toolbar">
             <span class="result-count">
                 <strong>{{ eventos|length }}</strong> eventos disponíveis
@@ -28,7 +27,6 @@
         </div>
     </header>
     
-    <!-- GRID DE EVENTOS -->
     <section class="events-catalog">
         <div class="event-grid">
           
@@ -39,11 +37,10 @@
                         {% if evento.imagem %}
                             <img src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
                         {% else %}
-                            <!-- Gera uma imagem aleatória consistente baseada no ID -->
                             <img src="https://picsum.photos/seed/{{evento.id}}/400/250" alt="Imagem ilustrativa">
                         {% endif %}
                         
-                        <!-- Data flutuante (Quadrado Branco) -->
+
                         <div class="floating-date">
                             <span class="day">{{ evento.data|date:"d" }}</span>
                             <span class="month">{{ evento.data|date:"M" }}</span>
@@ -51,7 +48,6 @@
                     </div>
 
                     <div class="body">
-                        <!-- Categoria (Tag Azul) -->
                         {% if evento.categoria %}
                             <span class="category-tag-small">{{ evento.categoria.nome }}</span>
                         {% endif %}

@@ -47,7 +47,6 @@ class Preferencia(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='preferencias')
     receber_emails = models.BooleanField(default=True)
     cidade_padrao = models.CharField(max_length=100, blank=True, null=True)
-    # Aqui usamos ManyToMany para ele poder escolher várias categorias
     interesses = models.ManyToManyField(Categoria, blank=True)
 
     def __str__(self):

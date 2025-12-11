@@ -12,34 +12,27 @@ from django.db.models import Avg
 from django.core.exceptions import ObjectDoesNotExist
 
 def home(request):
-    # 1. Começa com todos os eventos (Padrão)
+
     queryset = Evento.objects.all()
     titulo_secao = "Eventos em Destaque"
     
-    # 2. Tenta personalizar se estiver logado
     if request.user.is_authenticated:
         try:
-            # Tenta acessar as preferências do usuário
-            # Se der erro aqui, é porque o usuário nunca salvou preferências
             pref = request.user.preferencias 
             
             interesses = pref.interesses.all()
             
-            # Se ele marcou interesses
+
             if interesses.exists():
                 print(f"DEBUG: O usuário {request.user} gosta de: {interesses}")
                 
-                # Filtra os eventos
                 eventos_filtrados = queryset.filter(categoria__in=interesses)
-                
-                # AQUI ESTÁ O SEGREDO:
-                # Só aplicamos o filtro se existirem eventos daquelas categorias.
+
                 if eventos_filtrados.exists():
                     queryset = eventos_filtrados
                     titulo_secao = f"Recomendados para {request.user.first_name or request.user.username}"
                 else:
                     print("DEBUG: Usuário tem interesses, mas não existem eventos dessas categorias no banco.")
-                    # O código continua usando o 'queryset' original (todos os eventos)
             else:
                 print("DEBUG: Usuário tem preferência salva, mas não marcou nenhuma caixa.")
 
@@ -48,7 +41,6 @@ def home(request):
         except AttributeError:
             print("DEBUG: Erro de configuração no Model. Verifique o related_name='preferencias'.")
 
-    # 3. Aplica a aleatoriedade e o limite
     eventos_carousel = queryset.order_by('?')[:15]
 
     contexto = {
@@ -137,21 +129,17 @@ def favoritos_view(request):
 
 @login_required
 def preferencias_view(request):
-    # Garante que o usuário tenha um objeto de preferências (cria se não existir)
+
     preferencia, created = Preferencia.objects.get_or_create(usuario=request.user)
     
-    # Busca todas as categorias para montar o formulário
     todas_categorias = Categoria.objects.all()
 
     if request.method == 'POST':
-        # 1. Atualiza Cidade e Email
         preferencia.cidade_padrao = request.POST.get('cidade_padrao', '')
         preferencia.receber_emails = request.POST.get('receber_emails') == 'on'
         
-        # 2. Atualiza os Interesses (ManyToMany é um pouco diferente)
-        # Limpa os interesses atuais e adiciona os marcados
         preferencia.interesses.clear()
-        ids_categorias = request.POST.getlist('interesses') # Pega lista de checkboxes
+        ids_categorias = request.POST.getlist('interesses') 
         for cat_id in ids_categorias:
             preferencia.interesses.add(cat_id)
             
@@ -198,18 +186,17 @@ def resultado_busca(request):
     if categoria_id:
         eventos = eventos.filter(categoria_id=categoria_id)
 
-    # 4. Filtro especial de Avaliação (Média)
     if avaliacao_minima:
-        # Primeiro calculamos a média de cada evento, depois filtramos
+
         try:
             nota = int(avaliacao_minima)
             eventos = eventos.annotate(media_notas=Avg('avaliacoes__nota')).filter(media_notas__gte=nota)
         except ValueError:
-            pass # Se o valor não for número, ignora
+            pass 
 
     contexto = {
         'eventos': eventos,
-        'termo_busca': termo # Para manter o termo na barra de busca se quiser
+        'termo_busca': termo 
     }
     return render(request, 'core/resultado_busca.html', contexto)
 
@@ -267,7 +254,7 @@ def avaliar_evento(request, evento_id):
         nota = request.POST.get('nota')
         
         if nota:
-            # Cria ou atualiza a avaliação do usuário
+
             Avaliacao.objects.update_or_create(
                 evento=evento,
                 usuario=request.user,
@@ -289,25 +276,20 @@ def adicionar_comentario(request, evento_id):
                 usuario=request.user,
                 texto=texto
             )
-            # Não precisa de mensagem de sucesso para comentários rápidos, 
-            # mas se quiser, pode usar messages.success
+
             
     return redirect('detalhe_evento', evento_id=evento_id)
 
 @login_required
 def deletar_comentario(request, comentario_id):
-    # Busca o comentário ou dá erro 404 se não existir
+
     comentario = get_object_or_404(Comentario, pk=comentario_id)
-    
-    # Salva o ID do evento para redirecionar depois
+
     evento_id = comentario.evento.id
     
-    # SEGURANÇA: Só apaga se o usuário logado for o dono do comentário
     if request.user == comentario.usuario or request.user.is_staff:
         comentario.delete()
-        # Opcional: messages.success(request, "Comentário excluído.")
     else:
-        # Opcional: messages.error(request, "Você não tem permissão para excluir este comentário.")
         pass
 
     return redirect('detalhe_evento', evento_id=evento_id)

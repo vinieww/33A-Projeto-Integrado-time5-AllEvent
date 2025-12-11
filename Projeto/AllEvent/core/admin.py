@@ -6,6 +6,6 @@ admin.site.register(Categoria)
 
 @admin.register(Comentario)
 class ComentarioAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'evento', 'texto', 'data_criacao') # Colunas que aparecem na lista
-    list_filter = ('evento', 'data_criacao') # Filtros laterais
-    search_fields = ('texto', 'usuario__username') # Barra de busca
+    list_display = ('usuario', 'evento', 'texto', 'data_criacao') 
+    list_filter = ('evento', 'data_criacao') 
+    search_fields = ('texto', 'usuario__username') 

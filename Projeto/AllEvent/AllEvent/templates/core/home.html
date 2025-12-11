@@ -144,7 +144,6 @@
       </form>
     </div>
     
-    <!-- WRAPPER DO CARROSSEL -->
     <div class="carousel-wrapper">
        <h2 style="margin-bottom: 24px; font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--text-color-dark); padding-left: 60px; letter-spacing: -0.5px;">
             {{ titulo_secao }}
@@ -201,14 +200,11 @@
 
     if (track && nextButton && prevButton && track.children.length > 0) {
         
-        // Função para calcular o quanto rolar (rola 1/3 da largura visível por vez)
         const getScrollAmount = () => track.clientWidth / 3;
 
         nextButton.addEventListener('click', () => {
-            // Lógica de Loop Infinito (Ida)
             const maxScrollLeft = track.scrollWidth - track.clientWidth;
             
-            // Se estivermos muito perto do fim (margem de erro de 10px), volta pro começo
             if (track.scrollLeft >= maxScrollLeft - 10) {
                 track.scrollTo({ left: 0, behavior: 'smooth' });
             } else {
@@ -217,8 +213,7 @@
         });
 
         prevButton.addEventListener('click', () => {
-            // Lógica de Loop Infinito (Volta)
-            // Se estivermos no comecinho (margem de erro 10px), vai pro final
+
             if (track.scrollLeft <= 10) {
                 track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
             } else {
