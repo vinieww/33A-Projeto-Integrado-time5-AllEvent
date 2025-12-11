@@ -1,0 +1,485 @@
+[
+{
+  "model": "core.categoria",
+  "pk": 6,
+  "fields": {
+    "nome": "SHOW"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 7,
+  "fields": {
+    "nome": "TEATRO"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 8,
+  "fields": {
+    "nome": "STAND-UP"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 9,
+  "fields": {
+    "nome": "FESTIVAL"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 10,
+  "fields": {
+    "nome": "ORQUESTRA"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 11,
+  "fields": {
+    "nome": "GASTRONOMIA"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 12,
+  "fields": {
+    "nome": "ESPORTE"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 13,
+  "fields": {
+    "nome": "CONFERÊNCIA"
+  }
+},
+{
+  "model": "core.categoria",
+  "pk": 14,
+  "fields": {
+    "nome": "EXPOSIÇÃO"
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 9,
+  "fields": {
+    "nome": "Coldplay - Music of the Spheres",
+    "local": "Estádio do Morumbi, SP",
+    "data": "2026-01-10T17:56:24Z",
+    "descricao": "Uma experiência intergaláctica espera por você. A turnê mundial que quebrou recordes de público traz pulseiras de LED, fogos sustentáveis e os maiores hits da banda britânica. Prepare-se para cantar 'Yellow' e 'Fix You' em uníssono com 70 mil pessoas.",
+    "imagem": "eventos_imagens/bcaf9bfe50f2e039edbfcd7c191df4b6.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 10,
+  "fields": {
+    "nome": "O Rei Leão - O Musical",
+    "local": "Teatro Renault, SP",
+    "data": "2025-12-21T17:56:24Z",
+    "descricao": "A savana africana ganha vida no palco. Com figurinos impressionantes, bonecos articulados e a trilha sonora inesquecível de Elton John, este é o maior espetáculo da Broadway em cartaz no Brasil. Emocionante para todas as idades.",
+    "imagem": "eventos_imagens/ccaae9459f3e5792b7143e571f8bda8d.jpg",
+    "categoria": 7,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 11,
+  "fields": {
+    "nome": "Whindersson Nunes - Efeito Borboleta",
+    "local": "Arena Hall, BH",
+    "data": "2025-12-26T17:56:24Z",
+    "descricao": "O maior nome do humor nacional retorna aos palcos com um texto inédito. Whindersson explora suas novas experiências de vida, viagens e situações cotidianas com aquele carisma piauiense que conquistou o Brasil. Risada garantida do início ao fim.",
+    "imagem": "eventos_imagens/1afffe14edd06d585d3f31295dce651f.jpg",
+    "categoria": 8,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 12,
+  "fields": {
+    "nome": "Tomorrowland Brasil",
+    "local": "Parque Maeda, Itu",
+    "data": "2026-04-10T17:56:24Z",
+    "descricao": "A magia acontece aqui. O maior festival de música eletrônica do mundo aterrissa no Brasil para 3 dias de loucura. O tema deste ano, 'Adscendo', promete cenários medievais, lasers de última geração e os melhores DJs do planeta, incluindo Martin Garrix e Alok.",
+    "imagem": "eventos_imagens/ec5041c91e5d79b2bf9a94882c30b761.jpg",
+    "categoria": 9,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 13,
+  "fields": {
+    "nome": "Caetano & Bethânia - Tour Histórica",
+    "local": "Mineirão, BH",
+    "data": "2026-01-25T17:56:24Z",
+    "descricao": "Um encontro de gigantes. Pela primeira vez em décadas, os irmãos Caetano Veloso e Maria Bethânia dividem o palco para uma turnê completa. Um repertório que atravessa a história da MPB, celebrando a cultura, a família e a arte brasileira.",
+    "imagem": "eventos_imagens/5989f779592adc47853b34ff2aa8d03b.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 14,
+  "fields": {
+    "nome": "Cirque du Soleil - Crystal",
+    "local": "Jeunesse Arena, RJ",
+    "data": "2026-02-09T17:56:24Z",
+    "descricao": "Pela primeira vez, o Cirque du Soleil desafia o gelo. Crystal mistura a arte circense de alto nível com patinação artística e radical. Acrobatas desafiam a gravidade em um cenário congelante e mágico. Visualmente deslumbrante.",
+    "imagem": "eventos_imagens/1961fe61dbdc99ae66209fe3d7a78b3c.jpg",
+    "categoria": 7,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 15,
+  "fields": {
+    "nome": "Festival Comida de Buteco",
+    "local": "Vários Locais, BH",
+    "data": "2025-12-16T17:56:24Z",
+    "descricao": "A maior competição de raiz do Brasil! Experimente os melhores tira-gostos criados pelos bares tradicionais de Belo Horizonte. O ingresso dá direito ao circuito de degustação no local central. Cerveja gelada e comida mineira de verdade.",
+    "imagem": "eventos_imagens/6657b17d6817b2b45079f3130ac37e5c.jpg",
+    "categoria": 11,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 16,
+  "fields": {
+    "nome": "OSESP toca Beethoven",
+    "local": "Sala São Paulo, SP",
+    "data": "2025-12-31T17:56:24Z",
+    "descricao": "A Orquestra Sinfônica do Estado de São Paulo apresenta a monumental 9ª Sinfonia de Beethoven. Sob a regência de Thierry Fischer, o concerto conta com coral completo. Uma oportunidade única de ouvir a 'Ode à Alegria' em uma das melhores salas acústicas do mundo.",
+    "imagem": "eventos_imagens/efda5eae693d7e0c1d8f9921b58c0b60.jpg",
+    "categoria": 10,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 17,
+  "fields": {
+    "nome": "Tardezinha - Thiaguinho",
+    "local": "Arena Fonte Nova, BA",
+    "data": "2026-03-11T17:56:24Z",
+    "descricao": "O pagode mais famoso do Brasil está de volta! Thiaguinho comanda uma roda de samba 360º que dura a tarde toda e entra pela noite. Convidados especiais, clima de verão e todos os sucessos para cantar junto.",
+    "imagem": "eventos_imagens/0cb373ec114a24f1bb8aacbbdb87f299.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 18,
+  "fields": {
+    "nome": "Hermanoteu na Terra de Godah",
+    "local": "Teatro Bradesco, SP",
+    "data": "2026-01-05T17:56:24Z",
+    "descricao": "A comédia clássica da Cia. Os Melhores do Mundo. Acompanhe a jornada do hebreu Hermanoteu em busca da terra de Godah, encontrando figuras históricas e bíblicas em situações hilárias. Um fenômeno do teatro brasileiro.",
+    "imagem": "eventos_imagens/3a7a50e1835dc4e12b00d1dcb71ddeb3.jpg",
+    "categoria": 7,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 19,
+  "fields": {
+    "nome": "Rock in Rio - Dia do Metal",
+    "local": "Cidade do Rock, RJ",
+    "data": "2026-06-29T17:56:24Z",
+    "descricao": "Prepare o pescoço! O dia mais pesado do festival traz Metallica, Iron Maiden e Sepultura. 12 horas de som pesado, roda punk e a energia incomparável da Cidade do Rock. Ingressos limitados.",
+    "imagem": "eventos_imagens/37bc09dd8a33a9c1afc206354b1f5e1f.jpg",
+    "categoria": 9,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 20,
+  "fields": {
+    "nome": "Titãs Encontro",
+    "local": "Allianz Parque, SP",
+    "data": "2026-01-20T17:56:24Z",
+    "descricao": "Todos ao mesmo tempo agora. A formação clássica dos Titãs se reúne para celebrar 40 anos de rock. Arnaldo Antunes, Nando Reis, Branco Mello e companhia tocam hits como 'Marvin', 'Sonífera Ilha' e 'Epitáfio'.",
+    "imagem": "eventos_imagens/13653292.jpeg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 21,
+  "fields": {
+    "nome": "Afropunk Bahia",
+    "local": "Parque de Exposições, Salvador",
+    "data": "2026-03-31T17:56:24Z",
+    "descricao": "Celebração da cultura negra, música e atitude. O maior festival de cultura preta do mundo em sua edição brasileira. Iza, Ludmilla e artistas internacionais em um evento que mistura moda, ancestralidade e futuro.",
+    "imagem": "eventos_imagens/f4ba4d753e260a0912e7b5844546fa78.jpg",
+    "categoria": 9,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 22,
+  "fields": {
+    "nome": "Bruna Louise - Burnout",
+    "local": "Teatro Positivo, Curitiba",
+    "data": "2025-12-23T17:56:24Z",
+    "descricao": "Bruna Louise segue quebrando tabus. Com seu humor ácido e sem filtros, ela fala sobre as pressões da vida moderna, relacionamentos desastrosos e a busca pelo sucesso sem enlouquecer. Empoderamento e gargalhadas.",
+    "imagem": "eventos_imagens/4475fec8119e3ca0134ab7e257a6f551.jpg",
+    "categoria": 8,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 23,
+  "fields": {
+    "nome": "Taylor Swift - The Eras Tour",
+    "local": "Engenhão, RJ",
+    "data": "2026-03-01T17:56:24Z",
+    "descricao": "O evento musical da década. Taylor Swift traz sua jornada através de todas as suas eras musicais. Um espetáculo visual de 3 horas com 44 músicas, trocas de figurino e uma produção de palco nunca vista antes.",
+    "imagem": "eventos_imagens/dbb47d74872671b73a9caa0d684d8bd0.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 24,
+  "fields": {
+    "nome": "Bruno Mars - Live in Brazil",
+    "local": "Allianz Parque, SP",
+    "data": "2026-01-30T18:03:02Z",
+    "descricao": "O 'Bruninho' está de volta! Com seu carisma inigualável e uma banda afiada, Bruno Mars promete um show repleto de funk, soul e pop. Hits como 'Uptown Funk', '24K Magic' e 'Locked Out of Heaven' vão fazer o estádio tremer.",
+    "imagem": "eventos_imagens/f26aa59a4263d64c14de6d080093324d.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 25,
+  "fields": {
+    "nome": "CCXP 25 - Comic Con Experience",
+    "local": "São Paulo Expo, SP",
+    "data": "2026-06-09T18:03:02Z",
+    "descricao": "O maior festival de cultura pop do mundo. Prepare seu cosplay! Painéis com atores de Hollywood, estandes interativos da Marvel, DC, Netflix e HBO, além do Artists' Alley com os melhores quadrinistas. Épico é pouco.",
+    "imagem": "eventos_imagens/acee4a478455a1c82aaeb5736164bb8c.jpg",
+    "categoria": 9,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 26,
+  "fields": {
+    "nome": "NBA House",
+    "local": "Shopping Eldorado, SP",
+    "data": "2026-01-05T18:03:02Z",
+    "descricao": "A casa do basquete no Brasil. Assista às finais da NBA em telões gigantes, participe de desafios de arremesso, encontre lendas do esporte e compre produtos oficiais. Uma imersão total no lifestyle do basquete americano.",
+    "imagem": "eventos_imagens/6e07857109f35c92c7a150f6ef2fcd1d.jpg",
+    "categoria": 12,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 27,
+  "fields": {
+    "nome": "Wicked - A História Não Contada",
+    "local": "Teatro Santander, SP",
+    "data": "2026-01-20T18:03:02Z",
+    "descricao": "Antes de Dorothy chegar, muito aconteceu em Oz. O musical blockbuster da Broadway conta a história da amizade improvável entre Elphaba, a Bruxa Má do Oeste, e Glinda, a Bruxa Boa. Efeitos visuais mágicos e a canção 'Defying Gravity'.",
+    "imagem": "eventos_imagens/4d9545f1a7c89af8b18fbfb15f587168.jpg",
+    "categoria": 7,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 28,
+  "fields": {
+    "nome": "Web Summit Rio",
+    "local": "Riocentro, RJ",
+    "data": "2026-03-21T18:03:02Z",
+    "descricao": "Onde o futuro acontece. A maior conferência de tecnologia e inovação do mundo reúne CEOs, startups, investidores e jornalistas globais. Palestras sobre IA, cripto, sustentabilidade e o futuro do trabalho. Networking de alto nível.",
+    "imagem": "eventos_imagens/7ed3b414a867aa0258ea3ada5389ba2d.jpg",
+    "categoria": 13,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 29,
+  "fields": {
+    "nome": "Jorge & Mateus - Único",
+    "local": "Estádio Serra Dourada, GO",
+    "data": "2026-01-15T18:03:02Z",
+    "descricao": "A dupla que definiu uma geração do sertanejo volta para casa. Um show histórico percorrendo toda a discografia, desde 'Pode Chorar' até os lançamentos atuais. Cerveja gelada, sofrência e o coro de milhares de fãs apaixonados.",
+    "imagem": "eventos_imagens/fbf38a4fb7bc302a70067cebd469b930_prSQ40F.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 30,
+  "fields": {
+    "nome": "Van Gogh - Immersive Experience",
+    "local": "Barra Shopping, RJ",
+    "data": "2025-12-18T18:03:02Z",
+    "descricao": "Entre nas pinturas de Van Gogh. Projeções em 360º, realidade virtual e som envolvente permitem que você caminhe pelos campos de girassóis e pela 'Noite Estrelada'. Uma forma revolucionária de apreciar a arte pós-impressionista.",
+    "imagem": "eventos_imagens/606fbb68fda46d198f03bcabb4350435.jpg",
+    "categoria": 14,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 31,
+  "fields": {
+    "nome": "Andrea Bocelli - In Concert",
+    "local": "Allianz Parque, SP",
+    "data": "2026-05-10T18:03:02Z",
+    "descricao": "O tenor mais amado do mundo retorna ao Brasil. Acompanhado por uma orquestra sinfônica e coral, Bocelli interpreta árias de óperas famosas e canções pop clássicas como 'Con Te Partirò'. Uma noite de elegância e emoção pura.",
+    "imagem": "eventos_imagens/fdaee633e35a53af517cf9d2abdd33e6.jpg",
+    "categoria": 10,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 32,
+  "fields": {
+    "nome": "Thiago Ventura - Modo Efetivo",
+    "local": "Teatro Frei Caneca, SP",
+    "data": "2025-12-29T18:03:02Z",
+    "descricao": "O fenômeno da comédia traz suas histórias da quebrada para o teatro. Thiago Ventura fala sobre amizade, relacionamentos e a vida na periferia com seu estilo único de contar histórias ('pose de quebrada'). Sucesso absoluto de bilheteria.",
+    "imagem": "eventos_imagens/193a509b81c10f595f2d1d9bc8b9296e.jpg",
+    "categoria": 8,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 33,
+  "fields": {
+    "nome": "Stock Car - Grande Prêmio",
+    "local": "Autódromo de Interlagos, SP",
+    "data": "2026-02-09T18:03:02Z",
+    "descricao": "Velocidade e adrenalina na principal categoria do automobilismo brasileiro. Veja de perto as ultrapassagens, o ronco dos motores V8 e a habilidade de pilotos como Rubens Barrichello e Felipe Massa. Visitação aos boxes disponível.",
+    "imagem": "eventos_imagens/b815c0d96153b77bccf1c5684e00b0d8.jpg",
+    "categoria": 12,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 34,
+  "fields": {
+    "nome": "Lollapalooza Brasil",
+    "local": "Autódromo de Interlagos, SP",
+    "data": "2026-07-09T18:03:02Z",
+    "descricao": "A mistura perfeita de indie, rock, pop e eletrônico. Três dias de música, moda e arte. Line-up com Billie Eilish, Tame Impala e Blink-182. A experiência Lolla inclui roda gigante, ativações de marcas e uma vibe inesquecível.",
+    "imagem": "eventos_imagens/52c64c45f4eb30b4144ad2943d4de8be.jpg",
+    "categoria": 9,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 35,
+  "fields": {
+    "nome": "O Fantasma da Ópera",
+    "local": "Teatro Renault, SP",
+    "data": "2026-02-04T18:03:02Z",
+    "descricao": "O musical mais antigo da Broadway. A trama misteriosa do gênio musical desfigurado que assombra a Ópera de Paris e se apaixona pela jovem soprano Christine. Cenários góticos, o famoso lustre caindo e músicas grandiosas.",
+    "imagem": "eventos_imagens/4501f1a5d53baaa528861791e109f11c.jpg",
+    "categoria": 7,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 36,
+  "fields": {
+    "nome": "Marisa Monte - Portas",
+    "local": "Concha Acústica, Salvador",
+    "data": "2026-01-02T18:03:02Z",
+    "descricao": "Elegância e voz inconfundível. Marisa Monte apresenta a turnê do álbum 'Portas', além de revisitar clássicos dos Tribalistas e de sua carreira solo como 'Ainda Bem' e 'Vilarejo'. Um show visualmente poético e musicalmente perfeito.",
+    "imagem": "eventos_imagens/5bc2744803548d054ce76cfa022bc49a.jpg",
+    "categoria": 6,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 37,
+  "fields": {
+    "nome": "Harry Potter in Concert",
+    "local": "Vibra São Paulo, SP",
+    "data": "2026-03-16T18:03:02Z",
+    "descricao": "Assista ao filme 'Harry Potter e a Pedra Filosofal' em uma tela gigante de alta definição, enquanto uma orquestra sinfônica toca a trilha sonora mágica de John Williams ao vivo, nota por nota. Imersão total no mundo bruxo.",
+    "imagem": "eventos_imagens/e76522c406b2c413a23ed6aaf574f68e.jpg",
+    "categoria": 10,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.evento",
+  "pk": 38,
+  "fields": {
+    "nome": "Oktoberfest Blumenau",
+    "local": "Vila Germânica, SC",
+    "data": "2026-04-20T18:03:02Z",
+    "descricao": "A maior festa alemã das Américas! Desfiles típicos, bandas tradicionais, trajes folclóricos e, claro, muito chopp e comida alemã (Eisbein, Salsichas, Bretzel). Uma celebração da cultura e da alegria em Santa Catarina.",
+    "imagem": "eventos_imagens/e91766720010ae7b483a71d13635cc00.jpg",
+    "categoria": 11,
+    "favoritos": []
+  }
+},
+{
+  "model": "core.preferencia",
+  "pk": 1,
+  "fields": {
+    "usuario": 3,
+    "receber_emails": false,
+    "cidade_padrao": "",
+    "interesses": [
+      6
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$xabp7juQn7i7nmE8hHiVAC$3wEwcztBK/dFaG01smfUAFHg9rNwW+gxBxwWI0ldxRM=",
+    "last_login": "2025-12-11T17:32:45Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-11-06T20:38:28Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
