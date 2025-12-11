@@ -100,7 +100,13 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 LOGIN_URL = 'login' 
 
-CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'http://localhost:8000', 'https://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',  
+    'https://allevent-site.onrender.com', 
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
 
 
 MEDIA_URL = '/media/'
@@ -115,3 +121,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
